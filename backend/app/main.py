@@ -3,12 +3,14 @@
 方案 §1：这一层是主体，不是转发层。业务逻辑、流程状态、表单定义、可见范围
 都在这儿；代理 CowAgent 对话只是它很小的一个功能。
 """
+import json
 from datetime import datetime, timezone
 
-from fastapi import Depends, FastAPI, Header, HTTPException
+from fastapi import Depends, FastAPI, Header, HTTPException, Request
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
-from . import ai, db, forms, repo
+from . import ai, db, forms, harness, repo, views
 
 app = FastAPI(title="AI-native OA")
 
@@ -300,3 +302,203 @@ async def fill_form(request: FillFormRequest) -> dict:
     except ai.ModelUnavailable as error:
         raise HTTPException(status_code=502, detail=str(error)) from error
     return {"flow_def_id": definition["id"], "form": form, "values": value, "_model": meta}
+
+
+@app.post("/api/ai/resolve-view")
+async def resolve_view(request: TextRequest, user: dict = Depends(current_user)) -> dict:
+    """方案 §4 #3：把人话翻译成「看哪个视图、什么条件」。
+
+    它**不查数据**——真正取数由组件自己调 `/api/views/{key}`，翻页排序不过模型。
+    原名叫 query 会误导实现者做成「每次翻页都过模型」，所以改了名。
+    """
+    specs = views.registry()
+    keys = {spec["key"] for spec in specs}
+
+    def validate(raw: dict) -> tuple[dict | None, str | None]:
+        key = raw.get("view")
+        if key not in keys:
+            return None, f"view 必须是清单里的 key 之一：{sorted(keys)}"
+        spec = next(item for item in specs if item["key"] == key)
+        query = raw.get("query") or {}
+        if not isinstance(query, dict):
+            return None, "query 必须是对象"
+        unknown = set(query) - set(spec["filters"])
+        if unknown:
+            return None, f'{key} 只支持这些筛选：{spec["filters"] or "（无）"}，不认识 {sorted(unknown)}'
+        return {"view": key, "component": spec["component"], "title": spec["title"], "query": query}, None
+
+    system = (
+        "把用户的话翻译成「看哪个视图、什么筛选条件」，只输出 JSON："
+        '{"view":"清单里的 key","query":{筛选条件}}。\n'
+        "不要自己造数据，也不要造清单里没有的 key。没有筛选条件就给空对象。\n\n"
+        f"可用视图：\n{views.describe(specs)}"
+    )
+    try:
+        value, meta = await ai.structured(system, request.text, validate)
+    except ai.ModelUnavailable as error:
+        raise HTTPException(status_code=502, detail=str(error)) from error
+    return {**value, "_model": meta}
+
+
+@app.get("/api/views")
+def view_registry() -> list[dict]:
+    return views.registry()
+
+
+@app.get("/api/views/{key:path}")
+def view_data(key: str, page: int = 1, user: dict = Depends(current_user), request: Request = None) -> dict:
+    """组件自己来取数：翻页、筛选都走这里，不经过模型。"""
+    query = {name: value for name, value in (request.query_params.items() if request else []) if name != "page"}
+    try:
+        return views.resolve(key, query, max(page, 1), user)
+    except KeyError:
+        raise HTTPException(status_code=404, detail=f"没有名为 {key} 的视图")
+
+
+class SkillDraftRequest(BaseModel):
+    flow_instance_id: int
+
+
+@app.post("/api/ai/skill-draft")
+async def skill_draft(request: SkillDraftRequest) -> dict:
+    """方案 §4 #4：按需求单内容生成 SKILL.md 草稿，给开发当起点。"""
+    instance = flow_instance(request.flow_instance_id)
+    definition = repo.get_flow_def(instance["flow_def_id"])
+    form = repo.form_of_flow(definition) if definition else None
+    described = "\n".join(
+        f'{field["label"]}：{instance["data"].get(field["key"], "")}'
+        for field in (form["fields"] if form else [])
+    ) or str(instance["data"])
+
+    def validate(raw: dict) -> tuple[dict | None, str | None]:
+        text = (raw.get("skill_md") or "").strip()
+        if len(text) < 40:
+            return None, "skill_md 太短，至少要有职责说明和执行步骤"
+        if "#" not in text:
+            return None, "skill_md 要是 markdown，至少有一个标题"
+        return {"skill_md": text}, None
+
+    system = (
+        "根据需求单写一份数字员工的 SKILL.md 草稿，只输出 JSON："
+        '{"skill_md":"markdown 全文"}。\n'
+        "包含：这个员工负责什么、可用什么信息、按什么步骤干活、什么情况下要找人确认。\n"
+        "这是给开发改的草稿，不要写空话。"
+    )
+    try:
+        value, meta = await ai.structured(system, described, validate)
+    except ai.ModelUnavailable as error:
+        raise HTTPException(status_code=502, detail=str(error)) from error
+    return {**value, "_model": meta}
+
+
+# ---------- 数字员工 ----------
+
+class AgentCreate(BaseModel):
+    name: str
+    description: str = ""
+    category: str = "业务支撑"
+    avatar: str | None = None
+    maturity: str | None = None
+    tags: list = []
+    quick_questions: list = []
+    capabilities: list = []
+    skill_md: str | None = None
+    flow_instance_id: int | None = None
+    visible_to: list = []
+
+
+@app.get("/api/agents")
+def agents(status: str | None = None, user: dict = Depends(current_user)) -> list[dict]:
+    """没有员工就是空列表。不返回演示数据——空状态是真相，假卡片不是。"""
+    found = repo.list_agents(status=status)
+    return [agent for agent in found
+            if not agent["visible_to"] or user["role"] in agent["visible_to"] or user["id"] in agent["visible_to"]]
+
+
+@app.get("/api/agents/{agent_id}")
+def agent_detail(agent_id: int) -> dict:
+    found = repo.get_agent(agent_id)
+    if found is None:
+        raise HTTPException(status_code=404, detail="数字员工不存在")
+    return found
+
+
+@app.post("/api/agents")
+def create_agent(request: AgentCreate, user: dict = Depends(current_user)) -> dict:
+    return repo.create_agent({**request.model_dump(), "status": "草稿"})
+
+
+class SkillSave(BaseModel):
+    skill_md: str
+
+
+@app.put("/api/agents/{agent_id}/skill")
+def save_skill(agent_id: int, request: SkillSave, user: dict = Depends(current_user)) -> dict:
+    agent_detail(agent_id)
+    return repo.update_agent(agent_id, skill_md=request.skill_md, status="开发中")
+
+
+class PublishRequest(BaseModel):
+    flow_instance_id: int
+
+
+@app.post("/api/agents/{agent_id}/publish")
+def publish_agent(agent_id: int, request: PublishRequest, user: dict = Depends(current_user)) -> dict:
+    """上线必须有一条走完的流程兜着。
+
+    第一条流程就是「数字员工的申请上线」（方案 §0）——留一条不走流程直接上线的
+    近路，等于把这个产品要验证的东西本身架空了。
+    """
+    agent = agent_detail(agent_id)
+    instance = repo.get_instance(request.flow_instance_id)
+    if instance is None:
+        raise HTTPException(status_code=404, detail="关联的流程实例不存在")
+    if instance["status"] != "已完成":
+        raise HTTPException(status_code=409, detail="关联流程尚未走完，不能上线")
+    if not agent["skill_md"]:
+        raise HTTPException(status_code=409, detail="还没有提交 skill 内容，不能上线")
+    return repo.update_agent(agent_id, status="已上线", flow_instance_id=request.flow_instance_id)
+
+
+@app.post("/api/agents/{agent_id}/disable")
+def disable_agent(agent_id: int, user: dict = Depends(current_user)) -> dict:
+    agent_detail(agent_id)
+    return repo.update_agent(agent_id, status="已下线")
+
+
+@app.get("/api/stats")
+def stats() -> dict:
+    return repo.stats()
+
+
+# ---------- 数字员工对话（代理到 CowAgent） ----------
+
+class ChatRequest(BaseModel):
+    message: str
+    session_id: str
+
+
+@app.post("/api/agent/{agent_id}/chat")
+async def agent_chat(agent_id: int, request: ChatRequest) -> dict:
+    agent = agent_detail(agent_id)
+    try:
+        request_id = await harness.send(agent, request.session_id, request.message)
+    except Exception as error:
+        raise HTTPException(status_code=502, detail=f"CowAgent 不可用：{error}") from error
+    repo.bump_agent_usage(agent_id)
+    return {"agent_id": agent_id, "session_id": request.session_id, "request_id": request_id}
+
+
+@app.get("/api/agent/{agent_id}/stream/{request_id}")
+async def agent_stream(agent_id: int, request_id: str) -> StreamingResponse:
+    agent = agent_detail(agent_id)
+
+    async def events():
+        try:
+            async for chunk in harness.stream(agent, request_id):
+                yield chunk
+        except Exception as error:  # 连不上也要让前端看见，不要静默断流
+            yield "data: " + json.dumps({"type": "error", "content": f"执行流中断：{error}"}, ensure_ascii=False) + "\n\n"
+
+    return StreamingResponse(events(), media_type="text/event-stream",
+                             headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})

@@ -193,3 +193,21 @@ def bump_agent_usage(agent_id: int) -> None:
     with connection() as conn:
         conn.execute("UPDATE agent SET usage_count = usage_count + 1 WHERE id=%s", (agent_id,))
         conn.commit()
+
+
+# ---------- 统计 ----------
+
+def stats() -> dict[str, int]:
+    """指标名说什么就算什么。
+
+    之前 completed_today 算的是「所有已完成」、new_this_month 算的是「员工总数」，
+    名字和口径对不上——那也是伪造状态，只是伪造得比较体面。
+    """
+    with rows() as cur:
+        online = cur.execute("SELECT count(*) AS n FROM agent WHERE status='已上线'").fetchone()["n"]
+        today = cur.execute(
+            "SELECT count(*) AS n FROM flow_instance WHERE finished_at IS NOT NULL"
+            " AND finished_at >= date_trunc('day', now())").fetchone()["n"]
+        month = cur.execute(
+            "SELECT count(*) AS n FROM agent WHERE created_at >= date_trunc('month', now())").fetchone()["n"]
+    return {"online_agents": online, "completed_today": today, "new_this_month": month}
