@@ -1,4 +1,11 @@
 {
+  "users": [
+    {"id": 1, "name": "小林", "role": "提需求"},
+    {"id": 2, "name": "老周", "role": "评审"},
+    {"id": 3, "name": "阿凯", "role": "开发"},
+    {"id": 4, "name": "小美", "role": "使用者"}
+  ],
+
   "forms": [
     {"id": 1, "name": "数字员工需求单", "fields": [
       {"key": "name", "label": "需求名称", "type": "text", "required": true},
@@ -6,18 +13,25 @@
       {"key": "description", "label": "需求描述", "type": "textarea", "required": true}
     ]}
   ],
+
   "flows": [
-    {"id": 1, "name": "数字员工申请上线", "form_id": 1, "nodes": [
-      {"key": "submit", "name": "提交需求", "type": "填单", "role": "提需求"},
-      {"key": "review", "name": "评审", "type": "审批", "role": "评审"},
-      {"key": "develop", "name": "开发", "type": "开发", "role": "开发"},
-      {"key": "done", "name": "已上线", "type": "完成"}
-    ]},
-    {"id": 2, "name": "费用报销审批", "form_id": 1, "nodes": [
-      {"key": "submit", "name": "提交报销", "type": "填单", "role": "提需求"},
-      {"key": "manager", "name": "主管审批", "type": "审批", "role": "评审"},
-      {"key": "finance", "name": "财务审批", "type": "审批", "role": "开发"},
-      {"key": "done", "name": "报销完成", "type": "完成"}
+    {"id": 1, "name": "数字员工申请上线", "nodes": [
+      {"key": "submit",  "name": "提交需求", "type": "填单", "role": "提需求", "form_id": 1},
+      {"key": "review",  "name": "评审",     "type": "审批", "role": "评审"},
+      {"key": "develop", "name": "开发",     "type": "开发", "role": "开发"},
+      {"key": "done",    "name": "已上线",   "type": "完成"}
     ]}
+  ],
+
+  "prompt_suggestions": [
+    {"id": 1, "page_key": "home",        "text": "帮我提个需求",         "order": 1},
+    {"id": 2, "page_key": "home",        "text": "哪个员工能处理合同",   "order": 2},
+    {"id": 3, "page_key": "home",        "text": "这个月需求都集中在哪", "order": 3},
+    {"id": 4, "page_key": "todo",        "text": "筛出这周要交的",       "order": 1},
+    {"id": 5, "page_key": "todo",        "text": "哪个最急",             "order": 2},
+    {"id": 6, "page_key": "todo",        "text": "这些都是谁提的",       "order": 3},
+    {"id": 7, "page_key": "requirement", "text": "跟以前的有重复吗",     "order": 1},
+    {"id": 8, "page_key": "requirement", "text": "帮我写评审意见",       "order": 2},
+    {"id": 9, "page_key": "requirement", "text": "大概要做多久",         "order": 3}
   ]
 }

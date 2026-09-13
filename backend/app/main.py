@@ -1,350 +1,302 @@
-import json
-import os
-from typing import Literal
+"""AI-native OA · 业务后端。
 
-import httpx
-from fastapi import FastAPI, HTTPException
-from fastapi.responses import StreamingResponse
+方案 §1：这一层是主体，不是转发层。业务逻辑、流程状态、表单定义、可见范围
+都在这儿；代理 CowAgent 对话只是它很小的一个功能。
+"""
+from datetime import datetime, timezone
+
+from fastapi import Depends, FastAPI, Header, HTTPException
 from pydantic import BaseModel
-from . import db
+
+from . import ai, db, forms, repo
 
 app = FastAPI(title="AI-native OA")
-
-with open(os.path.join(os.path.dirname(__file__), "definitions.json"), encoding="utf-8") as definitions_file:
-    DEFINITIONS = json.load(definitions_file)
-FLOW_DEFS = DEFINITIONS["flows"]
-FORM_DEFS = DEFINITIONS["forms"]
-FLOW_INSTANCES: dict[int, dict[str, object]] = {}
-
-
-def configured_flows() -> list[dict[str, object]]:
-    with db.connection() as conn:
-        rows = conn.execute("SELECT id,name,nodes FROM flow_def ORDER BY id").fetchall()
-    return [{"id": row[0], "name": row[1], "nodes": row[2]} for row in rows] or FLOW_DEFS
 
 
 @app.on_event("startup")
 def startup() -> None:
-    db.init_schema(DEFINITIONS)
+    db.init_schema()
 
 
-class FlowAdvance(BaseModel):
-    actor_role: str
-    data: dict[str, object] = {}
+# ---------- 身份 ----------
+# 第一版不做鉴权（方案 §11）：前端登录后把用户 id 带在 header 里，
+# 后端据此决定「看到什么」，但不做强制访问控制。
 
-
-class FlowCreate(BaseModel):
-    flow_def_id: int = 1
-    data: dict[str, object] = {}
-
-
-class FillFormRequest(BaseModel):
-    text: str
-
-
-class RequirementForm(BaseModel):
-    name: str
-    level: Literal["高", "中", "低"]
-    description: str
-
-
-class FillFormResponse(BaseModel):
-    form: RequirementForm
-    source: Literal["model", "fallback"]
-
-
-class AgentChatRequest(BaseModel):
-    message: str
-    session_id: str | None = None
-
-
-class DispatchRequest(BaseModel):
-    text: str
-
-
-class ResolveViewRequest(BaseModel):
-    text: str
-
-
-class SkillDraftRequest(BaseModel):
-    requirement: dict[str, object]
-
-
-class AnalysisRequest(BaseModel):
-    table: Literal["flow_instance", "agent"]
-
-
-class AgentCreate(BaseModel):
-    name: str
-    description: str = ""
-    category: str = "业务支撑"
-    skill_md: str | None = None
-    status: str = "草稿"
-    flow_instance_id: int | None = None
+def current_user(x_user_id: int | None = Header(default=None)) -> dict:
+    if x_user_id is None:
+        raise HTTPException(status_code=401, detail="未登录")
+    user = repo.get_user(x_user_id)
+    if user is None:
+        raise HTTPException(status_code=401, detail="用户不存在")
+    return user
 
 
 class LoginRequest(BaseModel):
     name: str
-    role: Literal["使用者", "提需求", "评审", "开发"]
-
-
-async def cow_login(client: httpx.AsyncClient, base_url: str, password: str | None) -> httpx.Cookies:
-    cookies = httpx.Cookies()
-    if password is None:
-        return cookies
-    response = await client.post(f"{base_url}/auth/login", json={"password": password})
-    response.raise_for_status()
-    cookies.update(response.cookies)
-    return cookies
-
-
-@app.get("/api/health")
-def health() -> dict[str, str]:
-    return {"status": "ok"}
 
 
 @app.post("/api/auth/login")
-def login(request: LoginRequest) -> dict[str, object]:
-    with db.connection() as conn:
-        row = conn.execute("SELECT id,name,role FROM \"user\" WHERE name=%s AND role=%s", (request.name, request.role)).fetchone()
-        if row is None:
-            row = conn.execute("INSERT INTO \"user\" (name,role) VALUES (%s,%s) RETURNING id,name,role", (request.name, request.role)).fetchone()
-        conn.commit()
-    return {"user": {"id": row[0], "name": row[1], "role": row[2]}}
+def login(request: LoginRequest) -> dict:
+    """按姓名登录。角色是 user 表里的数据，不是代码里的枚举——
+    新流程要用「主管」「财务」这种角色时加一行用户即可，不改代码。"""
+    user = repo.find_user(request.name.strip())
+    if user is None:
+        raise HTTPException(status_code=404, detail=f"没有叫「{request.name}」的用户")
+    return {"user": user}
 
 
-@app.get("/api/stats")
-def stats() -> dict[str, int]:
-    with db.connection() as conn:
-        online = conn.execute("SELECT count(*) FROM agent WHERE status='已上线'").fetchone()[0]
-        completed = conn.execute("SELECT count(*) FROM flow_instance WHERE status='已完成'").fetchone()[0]
-        added = conn.execute("SELECT count(*) FROM agent").fetchone()[0]
-    return {"online_agents": online, "completed_today": completed, "new_this_month": added}
+@app.get("/api/users")
+def users() -> list[dict]:
+    return repo.list_users()
 
 
-@app.get("/api/components")
-def components() -> list[dict[str, object]]:
-    return [
-        {"component": "metric", "description": "单值指标", "params": ["value", "title", "change"]},
-        {"component": "chart", "description": "趋势与比较", "params": ["type", "series"]},
-        {"component": "table", "description": "明细表格", "params": ["columns", "rows", "page"]},
-        {"component": "graph", "description": "关系图谱", "params": ["nodes", "edges"]},
-        {"component": "text", "description": "叙述文本", "params": ["markdown"]},
-    ]
+@app.get("/api/health")
+def health() -> dict:
+    return {"status": "ok"}
 
 
-@app.post("/api/analysis/query")
-def analysis_query(request: AnalysisRequest) -> dict[str, object]:
-    allowed = {"flow_instance": "SELECT id, flow_def_id, current_node, status, data FROM flow_instance ORDER BY id", "agent": "SELECT id, name, category, status, usage_count FROM agent ORDER BY id"}
-    with db.connection() as conn:
-        cursor = conn.execute(allowed[request.table])
-        rows = cursor.fetchall()
-        columns = [description.name for description in cursor.description]
-    return {"table": request.table, "columns": columns, "rows": [list(row) for row in rows]}
-
-
-@app.post("/api/ai/fill-form", response_model=FillFormResponse)
-async def fill_form(request: FillFormRequest) -> FillFormResponse:
-    base_url = os.getenv("MODEL_BASE_URL", "http://127.0.0.1:9182/v1").rstrip("/")
-    model = os.getenv("MODEL_NAME", "glm-5.3-flash")
-    fields = FORM_DEFS[0]["fields"]
-    field_hint = "、".join(f["key"] for f in fields)
-    payload = {"model": model, "messages": [{"role": "system", "content": f"只输出 JSON，字段为 {field_hint}；level 只能是高、中、低。"}, {"role": "user", "content": request.text}], "response_format": {"type": "json_object"}, "temperature": 0}
-    try:
-        async with httpx.AsyncClient(timeout=30) as client:
-            response = await client.post(f"{base_url}/chat/completions", json=payload)
-            response.raise_for_status()
-            content = response.json()["choices"][0]["message"]["content"]
-            return FillFormResponse(form=RequirementForm.model_validate(json.loads(content)), source="model")
-    except Exception as exc:
-        raise HTTPException(status_code=502, detail=f"模型填表失败：{exc}") from exc
-
-
-@app.post("/api/ai/dispatch")
-def dispatch(request: DispatchRequest) -> dict[str, object]:
-    text = request.text.strip()
-    if any(word in text for word in ("员工", "助手", "帮我干")):
-        return {"route": "agent", "agent_id": 1}
-    if any(word in text for word in ("提需求", "提个需求", "需求单", "申请")):
-        return {"route": "fill_form"}
-    return {"route": "view", "component": "table", "query": {}}
-
-
-@app.post("/api/ai/resolve-view")
-def resolve_view(request: ResolveViewRequest) -> dict[str, object]:
-    text = request.text
-    if any(word in text for word in ("多少", "数量", "指标")):
-        return {"component": "metric", "query": {"text": text}, "data": {"title": "当前需求数", "value": len(db.list_instances())}}
-    if any(word in text for word in ("趋势", "变化", "增长")):
-        return {"component": "chart", "query": {"text": text}, "data": {"type": "bar", "series": [{"name": "需求", "data": [3, 5, 4, 8]}]}}
-    if any(word in text for word in ("关系", "关联", "地图")):
-        return {"component": "graph", "query": {"text": text}, "data": {"nodes": [{"id": "flow", "label": "需求流程"}, {"id": "agent", "label": "数字员工"}], "edges": [{"source": "flow", "target": "agent", "label": "产生"}]}}
-    return {"component": "table", "query": {"text": text}, "data": {"columns": ["需求名称", "状态"], "rows": [{"需求名称": row["data"].get("name", "未命名"), "状态": row["status"]} for row in db.list_instances()]}}
-
-
-@app.post("/api/ai/skill-draft")
-def skill_draft(request: SkillDraftRequest) -> dict[str, str]:
-    requirement = request.requirement
-    name = requirement.get("name", "未命名数字员工")
-    description = requirement.get("description", "")
-    return {"skill_md": f"---\nname: {name}\ndescription: {description}\n---\n\n# 执行步骤\n\n1. 根据用户输入完成任务。"}
-
-
-@app.post("/api/agent/{agent_id}/chat")
-async def agent_chat(agent_id: int, request: AgentChatRequest) -> dict[str, object]:
-    base_url = os.getenv("COWAGENT_BASE_URL", "http://127.0.0.1:19989").rstrip("/")
-    token = os.getenv("COWAGENT_TOKEN")
-    headers = {"Authorization": f"Bearer {token}"} if token else {}
-    payload = {"session_id": request.session_id, "message": request.message, "stream": True}
-    try:
-        async with httpx.AsyncClient(timeout=20) as client:
-            cookies = await cow_login(client, base_url, os.getenv("COWAGENT_PASSWORD"))
-            response = await client.post(f"{base_url}/message", json=payload, headers=headers, cookies=cookies)
-            response.raise_for_status()
-            body = response.json()
-            return {"agent_id": agent_id, "request_id": body.get("request_id"), "session_id": request.session_id}
-    except Exception as exc:
-        raise HTTPException(status_code=502, detail=f"CowAgent 不可用：{exc}") from exc
-
-
-@app.get("/api/agent/{agent_id}/stream/{request_id}")
-async def agent_stream(agent_id: int, request_id: str) -> StreamingResponse:
-    base_url = os.getenv("COWAGENT_BASE_URL", "http://127.0.0.1:19989").rstrip("/")
-    password = os.getenv("COWAGENT_PASSWORD")
-
-    async def events():
-        async with httpx.AsyncClient(timeout=None) as client:
-            cookies = await cow_login(client, base_url, password)
-            async with client.stream("GET", f"{base_url}/stream", params={"request_id": request_id}, cookies=cookies) as response:
-                response.raise_for_status()
-                async for line in response.aiter_lines():
-                    yield f"{line}\n"
-
-    return StreamingResponse(events(), media_type="text/event-stream")
-
-
-@app.get("/api/agents")
-def agents() -> list[dict[str, object]]:
-    try:
-        with db.connection() as conn:
-            rows = conn.execute("SELECT id,name,description,category,usage_count,status FROM agent WHERE status='已上线' ORDER BY id").fetchall()
-        if rows: return [{"id": r[0], "name": r[1], "description": r[2], "category": r[3], "usage_count": r[4], "status": r[5]} for r in rows]
-    except Exception:
-        pass
-    return [
-        {"id": 1, "name": "合同解析助手", "description": "提取合同关键信息并生成结构化结果", "category": "业务支撑", "usage_count": 0, "demo": True},
-        {"id": 2, "name": "数据分析助手", "description": "查询业务数据，生成图表和分析结论", "category": "数据分析", "usage_count": 0, "demo": True},
-        {"id": 3, "name": "制度问答助手", "description": "回答制度与流程相关问题", "category": "知识服务", "usage_count": 0, "demo": True},
-    ]
-
-
-@app.post("/api/agents")
-def create_agent(request: AgentCreate) -> dict[str, object]:
-    data = request.model_dump()
-    flow_instance_id = data.pop('flow_instance_id', None)
-    agent = db.create_agent(data)
-    if flow_instance_id is not None:
-        db.update_agent(agent['id'], flow_instance_id=flow_instance_id)
-        agent['flow_instance_id'] = flow_instance_id
-    return agent
-
-
-@app.get("/api/agents/{agent_id}")
-def get_agent(agent_id: int) -> dict[str, object]:
-    with db.connection() as conn:
-        row = conn.execute("SELECT id,name,description,category,status,skill_md,usage_count FROM agent WHERE id=%s", (agent_id,)).fetchone()
-    if row is None:
-        raise HTTPException(status_code=404, detail="数字员工不存在")
-    return {"id": row[0], "name": row[1], "description": row[2], "category": row[3], "status": row[4], "skill_md": row[5], "usage_count": row[6]}
-
-
-@app.put("/api/agents/{agent_id}/skill")
-def save_agent_skill(agent_id: int, payload: dict[str, str]) -> dict[str, object]:
-    return db.update_agent(agent_id, skill_md=payload.get('skill_md', ''), status=payload.get('status', '待评审')) or {}
-
-
-@app.post("/api/agents/{agent_id}/publish")
-def publish_agent(agent_id: int, payload: dict[str, int] | None = None) -> dict[str, object]:
-    instance_id = (payload or {}).get('flow_instance_id')
-    if instance_id is not None:
-        instance = db.get_instance(instance_id)
-        if instance is None or instance['status'] != '已完成':
-            raise HTTPException(status_code=409, detail='关联流程尚未完成')
-    return db.update_agent(agent_id, status='已上线', flow_instance_id=instance_id) or {}
-
-
-@app.post("/api/agents/{agent_id}/disable")
-def disable_agent(agent_id: int) -> dict[str, object]:
-    return db.update_agent(agent_id, status='已下线') or {}
-
-
-@app.get("/api/todos")
-def todos(role: str = "使用者") -> list[dict[str, object]]:
-    items = []
-    for instance in db.list_instances():
-        definition = next((d for d in configured_flows() if d['id'] == instance['flow_def_id']), None)
-        if not definition or instance['status'] == '已完成':
-            continue
-        node = next((n for n in definition['nodes'] if n['key'] == instance['current_node']), None)
-        if node and node.get('role') == role:
-            items.append({'id': instance['id'], 'title': instance['data'].get('name', definition['name']),
-                          'kind': node['name'], 'owner': '', 'status': instance['status']})
-    return items
-
+# ---------- 定义（表单 / 流程 / 提示词建议） ----------
 
 @app.get("/api/flows")
-def flows() -> list[dict[str, object]]:
-    with db.connection() as conn:
-        rows = conn.execute("SELECT id,name,nodes FROM flow_def ORDER BY id").fetchall()
-    return [{"id": row[0], "name": row[1], "nodes": row[2]} for row in rows] or FLOW_DEFS
+def flows() -> list[dict]:
+    return repo.list_flow_defs()
+
+
+@app.get("/api/flows/{flow_def_id}")
+def flow(flow_def_id: int) -> dict:
+    definition = repo.get_flow_def(flow_def_id)
+    if definition is None:
+        raise HTTPException(status_code=404, detail="流程定义不存在")
+    return {**definition, "form": repo.form_of_flow(definition)}
 
 
 @app.get("/api/forms")
-def forms() -> list[dict[str, object]]:
-    with db.connection() as conn:
-        rows = conn.execute("SELECT id,name,fields FROM form_def ORDER BY id").fetchall()
-    return [{"id": row[0], "name": row[1], "fields": row[2]} for row in rows] or FORM_DEFS
+def form_defs() -> list[dict]:
+    return repo.list_form_defs()
+
+
+@app.get("/api/forms/{form_id}")
+def form_def(form_id: int) -> dict:
+    found = repo.get_form_def(form_id)
+    if found is None:
+        raise HTTPException(status_code=404, detail="表单定义不存在")
+    return found
+
+
+@app.get("/api/prompt-suggestions")
+def prompt_suggestions(page_key: str) -> list[dict]:
+    return repo.list_prompt_suggestions(page_key)
+
+
+# ---------- 流程实例 ----------
+
+class FlowCreate(BaseModel):
+    flow_def_id: int
+    data: dict = {}
+    visible_to: list = []
+
+
+class FlowAdvance(BaseModel):
+    data: dict = {}
+
+
+def _node(definition: dict, key: str) -> tuple[int, dict]:
+    for index, node in enumerate(definition["nodes"]):
+        if node["key"] == key:
+            return index, node
+    raise HTTPException(status_code=409, detail=f"节点 {key} 不在流程定义中")
+
+
+def _check_form_data(definition: dict, node: dict, data: dict) -> dict:
+    """填单节点提交的数据必须过 form_def 校验。字段从定义来，不从代码来。"""
+    if not node.get("form_id"):
+        return data
+    form = repo.get_form_def(node["form_id"])
+    if form is None:
+        raise HTTPException(status_code=409, detail=f"节点 {node['key']} 引用的表单 {node['form_id']} 不存在")
+    cleaned, problem = forms.validate(form, data)
+    if problem:
+        raise HTTPException(status_code=422, detail=f"表单校验未通过：{problem}")
+    return cleaned
+
+
+def _state_after(definition: dict, index: int) -> dict:
+    """走完第 index 个节点之后，实例处在什么状态。
+
+    终点节点不需要人再点一次「完成」——推进到它就是完成了。
+    """
+    nodes = definition["nodes"]
+    nxt = nodes[index + 1] if index + 1 < len(nodes) else None
+    if nxt is None:
+        return {"current_node": nodes[index]["key"], "status": "已完成", "finished_at": datetime.now(timezone.utc)}
+    if nxt["type"] == "完成":
+        return {"current_node": nxt["key"], "status": "已完成", "finished_at": datetime.now(timezone.utc)}
+    return {"current_node": nxt["key"], "status": "进行中", "finished_at": None}
 
 
 @app.post("/api/flow-instances")
-def create_flow_instance(request: FlowCreate) -> dict[str, object]:
-    definition = next((item for item in configured_flows() if item["id"] == request.flow_def_id), None)
+def create_flow_instance(request: FlowCreate, user: dict = Depends(current_user)) -> dict:
+    """提交表单 = 执行第一个节点。
+
+    所以新实例直接停在**下一个**节点上，不会把「提交需求」又挂回提交人自己的待办。
+    """
+    definition = repo.get_flow_def(request.flow_def_id)
     if definition is None:
         raise HTTPException(status_code=404, detail="流程定义不存在")
-    instance = db.create_instance(request.flow_def_id, request.data)
-    instance["current_node"] = definition["nodes"][0]["key"]
-    db.update_instance(instance)
-    return instance
+    entry = repo.entry_node(definition)
+    if entry.get("role") and entry["role"] != user["role"]:
+        raise HTTPException(status_code=403, detail=f"「{entry['name']}」只能由{entry['role']}发起，当前角色是{user['role']}")
+    data = _check_form_data(definition, entry, request.data)
+    instance = repo.create_instance(request.flow_def_id, entry["key"], data, user["id"], request.visible_to)
+    instance.update(_state_after(definition, 0))
+    return repo.save_instance(instance)
+
+
+@app.get("/api/flow-instances")
+def list_flow_instances(flow_def_id: int | None = None, status: str | None = None,
+                        mine: bool = False, user: dict = Depends(current_user)) -> list[dict]:
+    found = repo.list_instances(flow_def_id=flow_def_id, status=status,
+                                creator_id=user["id"] if mine else None)
+    return [item for item in found if _visible(item, user)]
+
+
+def _visible(instance: dict, user: dict) -> bool:
+    """可见范围过滤（方案 §2）：空列表 = 所有人可见。过滤掉即可，不做强制访问控制。"""
+    scope = instance.get("visible_to") or []
+    if not scope:
+        return True
+    return user["role"] in scope or user["id"] in scope or instance["creator_id"] == user["id"]
 
 
 @app.get("/api/flow-instances/{instance_id}")
-def flow_instance(instance_id: int) -> dict[str, object]:
-    instance = db.get_instance(instance_id)
+def flow_instance(instance_id: int) -> dict:
+    instance = repo.get_instance(instance_id)
     if instance is None:
         raise HTTPException(status_code=404, detail="流程实例不存在")
     return instance
 
 
 @app.post("/api/flow-instances/{instance_id}/advance")
-def advance_flow(instance_id: int, request: FlowAdvance) -> dict[str, object]:
+def advance_flow(instance_id: int, request: FlowAdvance, user: dict = Depends(current_user)) -> dict:
     instance = flow_instance(instance_id)
-    definition = next((item for item in configured_flows() if item['id'] == instance['flow_def_id']), None)
+    definition = repo.get_flow_def(instance["flow_def_id"])
     if definition is None:
         raise HTTPException(status_code=409, detail="流程定义不存在")
-    nodes = definition['nodes']
-    index = next((i for i, node in enumerate(nodes) if node["key"] == instance["current_node"]), None)
-    if index is None:
-        raise HTTPException(status_code=409, detail="当前节点不在流程定义中")
-    if instance['status'] == '已完成' or nodes[index]['type'] == '完成':
+    index, node = _node(definition, instance["current_node"])
+    if instance["status"] == "已完成" or node["type"] == "完成":
         raise HTTPException(status_code=409, detail="流程已完成")
-    current = nodes[index]
-    if current.get("role") and current["role"] != request.actor_role:
-        raise HTTPException(status_code=403, detail="当前角色不能推进此节点")
-    instance["data"] = {**instance.get("data", {}), **request.data}
-    if index + 1 >= len(nodes):
-        instance["status"] = "已完成"
-    else:
-        instance["current_node"] = nodes[index + 1]["key"]
-        instance["status"] = "已完成" if nodes[index + 1]['type'] == '完成' else "进行中"
-    db.update_instance(instance)
-    return instance
+    if node.get("role") and node["role"] != user["role"]:
+        raise HTTPException(status_code=403, detail=f"「{node['name']}」由{node['role']}处理，当前角色是{user['role']}")
+
+    merged = {**instance["data"], **request.data}
+    instance["data"] = _check_form_data(definition, node, merged) if node.get("form_id") else merged
+    instance.update(_state_after(definition, index))
+    return repo.save_instance(instance)
+
+
+@app.get("/api/todos")
+def todos(user: dict = Depends(current_user)) -> list[dict]:
+    """待办 = 停在「该我处理的节点」上的实例。节点归谁由 flow_def 说了算。"""
+    definitions = {item["id"]: item for item in repo.list_flow_defs()}
+    items = []
+    for instance in repo.list_instances(status="进行中"):
+        definition = definitions.get(instance["flow_def_id"])
+        if definition is None or not _visible(instance, user):
+            continue
+        node = next((n for n in definition["nodes"] if n["key"] == instance["current_node"]), None)
+        if node is None or node.get("role") != user["role"]:
+            continue
+        items.append({
+            "id": instance["id"],
+            "title": _title(instance, definition),
+            "kind": node["name"],
+            "flow_name": definition["name"],
+            "status": instance["status"],
+            "created_at": instance["created_at"].isoformat(),
+        })
+    return items
+
+
+def _title(instance: dict, definition: dict) -> str:
+    """列表标题取表单第一个文本字段的值，取不到就用流程名。"""
+    form = repo.form_of_flow(definition)
+    if form:
+        for field in form["fields"]:
+            value = instance["data"].get(field["key"])
+            if field.get("type") in forms.TEXT_TYPES and value:
+                return str(value)
+    return f'{definition["name"]} #{instance["id"]}'
+
+
+# ---------- AI 调用点 ----------
+
+class TextRequest(BaseModel):
+    text: str
+
+
+class FillFormRequest(BaseModel):
+    text: str
+    flow_def_id: int
+
+
+@app.post("/api/ai/dispatch")
+async def dispatch(request: TextRequest) -> dict:
+    """方案 §4 #1：三选一路由。唯一入口靠它成立——用户说什么都行，系统找对人。
+
+    输入必须带上「有哪些员工、各自能干什么」和「有哪些流程」，否则模型没法选。
+    """
+    agents = repo.list_agents(status="已上线")
+    flows_available = repo.list_flow_defs()
+    agent_ids = {item["id"] for item in agents}
+    flow_ids = {item["id"] for item in flows_available}
+
+    def validate(raw: dict) -> tuple[dict | None, str | None]:
+        route = raw.get("route")
+        if route not in {"agent", "fill_form", "view"}:
+            return None, "route 只能是 agent、fill_form、view 三者之一"
+        if route == "agent":
+            if raw.get("agent_id") not in agent_ids:
+                return None, f"agent_id 必须是这些已上线员工之一：{sorted(agent_ids) or '（当前没有已上线员工，不能选 agent）'}"
+            return {"route": route, "agent_id": raw["agent_id"]}, None
+        if route == "fill_form":
+            if raw.get("flow_def_id") not in flow_ids:
+                return None, f"flow_def_id 必须是这些流程之一：{sorted(flow_ids)}"
+            return {"route": route, "flow_def_id": raw["flow_def_id"]}, None
+        return {"route": route}, None
+
+    agent_lines = "\n".join(f'- id={a["id"]} {a["name"]}：{a["description"]}' for a in agents) or "（当前没有已上线的数字员工）"
+    flow_lines = "\n".join(f'- flow_def_id={f["id"]} {f["name"]}' for f in flows_available)
+    system = (
+        "你是企业 OA 的调度器。判断用户这句话该走哪条路，只输出 JSON。\n"
+        "- 想让某个数字员工干活 → {\"route\":\"agent\",\"agent_id\":数字}\n"
+        "- 想发起/提交一件事（提需求、报销等）→ {\"route\":\"fill_form\",\"flow_def_id\":数字}\n"
+        "- 想查看已有数据 → {\"route\":\"view\"}\n\n"
+        f"已上线的数字员工：\n{agent_lines}\n\n可发起的流程：\n{flow_lines}"
+    )
+    try:
+        value, meta = await ai.structured(system, request.text, validate)
+    except ai.ModelUnavailable as error:
+        raise HTTPException(status_code=502, detail=str(error)) from error
+    return {**value, "_model": meta}
+
+
+@app.post("/api/ai/fill-form")
+async def fill_form(request: FillFormRequest) -> dict:
+    """方案 §4 #2：填表单。字段来自 form_def，代码里一个字段名都没有。"""
+    definition = repo.get_flow_def(request.flow_def_id)
+    if definition is None:
+        raise HTTPException(status_code=404, detail="流程定义不存在")
+    form = repo.form_of_flow(definition)
+    if form is None:
+        raise HTTPException(status_code=409, detail=f"流程「{definition['name']}」没有配填单节点的表单")
+
+    system = (
+        f"根据用户的话填写《{form['name']}》，只输出 JSON 对象，键用下面给的英文 key。\n"
+        f"字段：\n{forms.describe(form)}\n"
+        "拿不准的选填字段留空或省略；不要编造用户没提到的事实。"
+    )
+    try:
+        value, meta = await ai.structured(system, request.text, lambda raw: forms.validate(form, raw))
+    except ai.ModelUnavailable as error:
+        raise HTTPException(status_code=502, detail=str(error)) from error
+    return {"flow_def_id": definition["id"], "form": form, "values": value, "_model": meta}
