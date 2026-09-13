@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TOOLPACK_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+
+# Python 3.11.15 复用 1.1.0 基线的 browser-use toolpack runtime（本补丁依赖该基线）
+PYTHON_BIN="${TOOLPACK_ROOT}/python/browser-use/runtime/cpython-3.11.15-linux-x86_64-gnu/bin/python3.11"
+SITE_PACKAGES="${TOOLPACK_ROOT}/python/drissionpage/site-packages"
+
+[ -x "${PYTHON_BIN}" ] || {
+  echo "browser-dp requires baseline Python runtime (offline-install 1.1.0): ${PYTHON_BIN}" >&2
+  exit 127
+}
+[ -d "${SITE_PACKAGES}/DrissionPage" ] || {
+  echo "browser-dp site-packages missing: ${SITE_PACKAGES}" >&2
+  exit 127
+}
+
+export PYTHONUNBUFFERED="${PYTHONUNBUFFERED:-1}"
+export PYTHONPATH="${SITE_PACKAGES}:${TOOLPACK_ROOT}/mcp/browser-dp${PYTHONPATH:+:${PYTHONPATH}}"
+# 浏览器容器 CDP 经宿主机 loopback 发布（见 docker-compose.browser.yml）
+export DP_BROWSER_ADDRESS="${DP_BROWSER_ADDRESS:-browser:9222}"
+export DP_DOWNLOADS_DIR="${DP_DOWNLOADS_DIR:-/home/agent/cow/browser-dp/downloads}"
+export DP_UPLOADS_DIR="${DP_UPLOADS_DIR:-/home/agent/cow/browser-dp/uploads}"
+export DP_WORKSPACE_DIR="${DP_WORKSPACE_DIR:-/home/agent/cow/browser-dp/workspace}"
+export DP_IGNORE_CERT_ERRORS="${DP_IGNORE_CERT_ERRORS:-}"
+
+# 红线：本 MCP 只接管已有浏览器（existing_only 由代码强制），绝不本地拉起 Chromium。
+exec "${PYTHON_BIN}" "${TOOLPACK_ROOT}/mcp/browser-dp/mcp_server.py"

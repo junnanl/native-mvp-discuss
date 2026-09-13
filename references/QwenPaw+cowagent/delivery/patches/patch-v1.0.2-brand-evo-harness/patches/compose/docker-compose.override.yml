@@ -1,0 +1,5 @@
+services:
+  cowagent:
+    environment:
+      COW_BRAND_NAME: "Evo-Harness"
+      CHATGPT_ON_WECHAT_EXEC: "sh /opt/cowagent/patch-mounted/frontend/bootstrap-brand.sh && python app.py"

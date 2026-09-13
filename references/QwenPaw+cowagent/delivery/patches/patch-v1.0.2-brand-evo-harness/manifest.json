@@ -1,0 +1,53 @@
+{
+  "packageType": "patch",
+  "patchVersion": "1.0.2-brand-evo-harness",
+  "packageStatus": "release",
+  "requiresPackageVersion": "1.0.0",
+  "requiresCowAgentVersion": "2.1.2",
+  "requiresBaseImage": "cowagent-offline:2.1.2-base.2-dev",
+  "dependencyChange": false,
+  "restartRequired": true,
+  "brand": {
+    "name": "Evo-Harness",
+    "displayVersion": "v1.0.0",
+    "style": "intelligent-agent-evolution",
+    "externalLinks": "hidden"
+  },
+  "targets": [
+    {
+      "type": "frontend-static",
+      "source": "patches/frontend/channel/web/chat.html",
+      "target": "patch-mounted/frontend/channel/web/chat.html"
+    },
+    {
+      "type": "frontend-static",
+      "source": "patches/frontend/channel/web/static/js/console.js",
+      "target": "patch-mounted/frontend/channel/web/static/js/console.js"
+    },
+    {
+      "type": "frontend-static",
+      "source": "patches/frontend/channel/web/static/logo.jpg",
+      "target": "patch-mounted/frontend/channel/web/static/logo.jpg"
+    },
+    {
+      "type": "frontend-static",
+      "source": "patches/frontend/channel/web/static/favicon.ico",
+      "target": "patch-mounted/frontend/channel/web/static/favicon.ico"
+    },
+    {
+      "type": "backend-source",
+      "source": "patches/frontend/channel/web/web_channel.py",
+      "target": "patch-mounted/frontend/channel/web/web_channel.py"
+    },
+    {
+      "type": "compose-override",
+      "source": "patches/compose/docker-compose.override.yml",
+      "target": "compose/docker-compose.override.yml"
+    }
+  ],
+  "rollback": {
+    "strategy": "restore-backed-up-patch-mounted-and-compose-override",
+    "restartRequired": true
+  },
+  "createdAt": "2026-07-06T10:35:00+08:00"
+}

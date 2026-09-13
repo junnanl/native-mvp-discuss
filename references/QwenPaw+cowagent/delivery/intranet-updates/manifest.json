@@ -1,0 +1,34 @@
+{
+  "packageType": "ordered-intranet-update-set",
+  "targetRootDefault": "/opt/cowagent-offline",
+  "requiresPackageVersion": "1.0.0",
+  "requiresCowAgentVersion": "2.1.2",
+  "packages": [
+    {
+      "order": 1,
+      "version": "1.0.3-runtime-config-persistence",
+      "file": "cowagent-site-update-v1.0.3-runtime-config.tar.gz",
+      "containsSiteSpecificCredentials": true
+    },
+    {
+      "order": 2,
+      "version": "1.0.4-officecli-toolpack",
+      "file": "cowagent-site-update-v1.0.4-officecli-toolpack.tar.gz",
+      "dependencyChange": false
+    },
+    {
+      "order": 3,
+      "version": "1.0.5-html-report",
+      "file": "cowagent-site-update-v1.0.5-html-report.tar.gz",
+      "dependencyChange": false
+    },
+    {
+      "order": 4,
+      "version": "1.0.6-mcp-ssh-manager",
+      "file": "cowagent-site-update-v1.0.6-mcp-ssh-manager.tar.gz",
+      "dependencyChange": false,
+      "containsSiteSpecificCredentials": false
+    }
+  ],
+  "createdAt": "2026-08-04T00:00:00+08:00"
+}

@@ -1,0 +1,9 @@
+.local/
+.env
+*.env
+storage/
+support-bundles/
+*.log
+*.db
+*.sqlite
+dist/

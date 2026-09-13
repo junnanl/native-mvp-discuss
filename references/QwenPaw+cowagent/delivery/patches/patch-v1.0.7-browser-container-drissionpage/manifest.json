@@ -1,0 +1,75 @@
+{
+  "packageType": "patch",
+  "patchVersion": "1.0.7-browser-container-drissionpage",
+  "packageStatus": "development",
+  "requiresPackageVersion": "1.1.0",
+  "requiresPatchVersion": null,
+  "requiresCowAgentVersion": "2.1.7",
+  "requiresBaseImage": "cowagent-offline:2.1.7-base.1-dev",
+  "dependencyChange": true,
+  "restartRequired": true,
+  "stateFile": "storage/cow/patch-state/1.0.7-browser-container-drissionpage.json",
+  "purpose": "Fix intranet browser crashes/restarts by decoupling Chromium into a dedicated container (4G mem limit, restart on-failure, persistent profile) and replacing the browser-use execution layer with a self-built thin DrissionPage 4.0.5.6 MCP exposing 4 fixed tools plus a hardened action library.",
+  "targets": [
+    {
+      "type": "mcp-toolpack",
+      "source": "patches/toolpacks/mcp/browser-dp",
+      "target": "toolpacks/mcp/browser-dp"
+    },
+    {
+      "type": "python-toolpack",
+      "source": "patches/toolpacks/python/drissionpage",
+      "target": "toolpacks/python/drissionpage"
+    },
+    {
+      "type": "compose-service",
+      "source": "patches/compose/docker-compose.browser.yml",
+      "target": "compose/docker-compose.browser.yml"
+    },
+    {
+      "type": "cowagent-mcp-config-merge",
+      "source": "scripts/apply.sh",
+      "target": "storage/cow/mcp.json"
+    },
+    {
+      "type": "cowagent-skill",
+      "source": "patches/skills/browser-dp",
+      "target": "storage/cow/skills/browser-dp"
+    }
+  ],
+  "upstream": {
+    "repository": "https://github.com/g1879/DrissionPage",
+    "version": "4.0.5.6",
+    "licenseNote": "custom license; personal/non-profit use per delivery owner; commercial use requires authorization from the copyright holder",
+    "docsSnapshot": "docs/reference/DrissionPageDocs4.0.5.6 (offline API reference used for implementation)"
+  },
+  "browserRuntime": {
+    "chromiumVersion": "120.0.6099.224-1~deb11u1",
+    "source": "existing cowagent-offline:2.1.7-base.1-dev image (no new image transferred)",
+    "cdpEndpoint": "browser:9222 (container network; host loopback 127.0.0.1:39222 for ops/verify)",
+    "memLimit": "4g (COW_BROWSER_MEM_LIMIT configurable)",
+    "profileVolume": "storage/browser/profile (login sessions survive restarts)"
+  },
+  "offlineRuntime": [
+    "All Python dependencies (DrissionPage 4.0.5.6 closure) are bundled as wheels unpacked under toolpacks/python/drissionpage/site-packages.",
+    "Python 3.11.15 interpreter is reused from the 1.1.0 baseline browser-use toolpack runtime.",
+    "The mcp SDK 1.26.0 is copied from the baseline browser-use site-packages; no fastmcp, no uv, no pip install at deployment time.",
+    "browser-dp attaches to an existing browser via CDP with existing_only=True; it can never spawn a browser inside the cowagent container."
+  ],
+  "mcpConfigChanges": [
+    "mcpServers.browser-use set to disabled:true but kept for rollback.",
+    "mcpServers.browser-dp added with fixed 4 tools: browser_run, browser_snapshot, browser_screenshot, browser_exec."
+  ],
+  "localAdaptations": [
+    "Thin MCP written from scratch following the tool-set design of upstream DrissionPageMCP (not adopted as-is; it targets DrissionPage 4.1.x API).",
+    "Action library with element ref registry, auto-reconnect, tab governance (cleanup_tabs, max 8 tabs), path whitelist for downloads/uploads.",
+    "browser_exec escape hatch guarded by static AST checks against os/subprocess/socket and dangerous builtins.",
+    "Compose COMPOSE_FILE chain persisted in compose/.env so later patch restarts keep the browser service."
+  ],
+  "rollback": {
+    "strategy": "restore-backed-up-toolpack-site-packages-mcp-json-skills-config-and-compose-file-stop-browser-container",
+    "restartRequired": true,
+    "preserves": "storage/browser/{profile,downloads,uploads} volumes"
+  },
+  "createdAt": "2026-09-06T21:00:00+08:00"
+}

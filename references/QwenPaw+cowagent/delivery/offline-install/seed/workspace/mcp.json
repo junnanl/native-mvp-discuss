@@ -1,0 +1,42 @@
+{
+  "mcpServers": {
+    "ssh-manager": {
+      "command": "/opt/node-v24.18.0-linux-x64/bin/node",
+      "args": [
+        "/opt/cowagent/toolpacks/mcp/mcp-ssh-manager/src/secure-entrypoint.mjs"
+      ],
+      "env": {
+        "HOME": "/home/agent/cow/mcp-ssh-manager/home",
+        "SSH_MANAGER_HOME": "/home/agent/cow/mcp-ssh-manager/home/.ssh-manager",
+        "SSH_ENV_PATH": "/home/agent/cow/mcp-ssh-manager/config/servers.env",
+        "SSH_CONFIG_PATH": "/home/agent/cow/mcp-ssh-manager/config/servers.toml",
+        "PREFER_TOML_CONFIG": "true",
+        "PATH": "/opt/cowagent/toolpacks/mcp/mcp-ssh-manager/runtime/bin:/usr/local/bin:/usr/bin:/bin",
+        "LD_LIBRARY_PATH": "/opt/cowagent/toolpacks/mcp/mcp-ssh-manager/runtime/lib",
+        "MCP_SSH_MAX_OUTPUT_LENGTH": "10000",
+        "MCP_SSH_DEFAULT_TIMEOUT": "120000"
+      },
+      "timeout": 120,
+      "disabled": false
+    },
+    "browser-use": {
+      "command": "/opt/cowagent/toolpacks/mcp/browser-use/bin/browser-use",
+      "args": [],
+      "env": {
+        "BROWSER_USE_HOME": "/home/agent/cow/browser-use",
+        "BH_HOME": "/home/agent/cow/browser-use/harness",
+        "BH_AGENT_WORKSPACE": "/home/agent/cow/browser-use/agent-workspace",
+        "BH_RUNTIME_DIR": "/tmp/cowagent-browser-use",
+        "BH_TMP_DIR": "/home/agent/cow/browser-use/tmp",
+        "BH_TELEMETRY": "false",
+        "BROWSER_HARNESS_TELEMETRY": "false",
+        "ANONYMIZED_TELEMETRY": "false",
+        "BH_CHROME_PATH": "/usr/bin/chromium",
+        "BH_CHROME_PORT": "9223",
+        "PATH": "/opt/cowagent/toolpacks/python/browser-use/venv/bin:/usr/local/bin:/usr/bin:/bin"
+      },
+      "timeout": 120,
+      "disabled": false
+    }
+  }
+}

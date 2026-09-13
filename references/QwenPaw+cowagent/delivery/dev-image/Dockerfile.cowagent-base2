@@ -1,0 +1,76 @@
+FROM zhayujie/chatgpt-on-wechat:2.1.2
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PIP_NO_CACHE_DIR=1 \
+    PYTHONUNBUFFERED=1 \
+    NODE_VERSION=24.18.0 \
+    NODE_DIST=node-v24.18.0-linux-x64 \
+    NODE_DIST_BASE_URL=https://npmmirror.com/mirrors/node \
+    NODE_HOME=/opt/node-v24.18.0-linux-x64 \
+    NODE_PATH=/opt/node-v24.18.0-linux-x64/lib/node_modules \
+    PATH=/opt/node-v24.18.0-linux-x64/bin:$PATH
+
+USER root
+
+RUN printf '%s\n' \
+      'deb http://mirrors.aliyun.com/debian bullseye main' \
+      'deb http://mirrors.aliyun.com/debian-security bullseye-security main' \
+      'deb http://mirrors.aliyun.com/debian bullseye-updates main' \
+      > /etc/apt/sources.list \
+    && printf '%s\n' \
+      'Acquire::Retries "5";' \
+      'Acquire::http::Timeout "60";' \
+      > /etc/apt/apt.conf.d/99cowagent-offline-retry
+
+RUN apt-get update \
+    && apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=60 install -y --no-install-recommends --fix-missing \
+      ca-certificates \
+      curl \
+      xz-utils \
+    && apt-get update \
+    && apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=60 install -y --no-install-recommends --fix-missing \
+      libreoffice \
+      libreoffice-writer \
+      libreoffice-calc \
+      libreoffice-impress \
+      pandoc \
+      poppler-utils \
+      tesseract-ocr \
+      tesseract-ocr-chi-sim \
+      tesseract-ocr-eng \
+      fonts-noto-color-emoji \
+      fonts-dejavu \
+      fonts-liberation \
+      ghostscript \
+      unzip \
+      zip \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN curl -fL --retry 5 --connect-timeout 15 --max-time 300 -o "${NODE_DIST}.tar.xz" "${NODE_DIST_BASE_URL}/v${NODE_VERSION}/${NODE_DIST}.tar.xz" \
+    && echo "55aa7153f9d88f28d765fcdad5ae6945b5c0f98a36881703817e4c450fa76742  ${NODE_DIST}.tar.xz" | sha256sum -c - \
+    && tar -xJf "${NODE_DIST}.tar.xz" -C /opt \
+    && ln -sf "${NODE_HOME}/bin/node" /usr/local/bin/node \
+    && ln -sf "${NODE_HOME}/bin/npm" /usr/local/bin/npm \
+    && ln -sf "${NODE_HOME}/bin/npx" /usr/local/bin/npx \
+    && ln -sf "${NODE_HOME}/bin/corepack" /usr/local/bin/corepack \
+    && rm -f "${NODE_DIST}.tar.xz"
+
+RUN python -m pip install --no-cache-dir \
+      pandas \
+      scipy \
+      scikit-learn \
+      matplotlib \
+      seaborn \
+      jinja2 \
+      markitdown[pdf,docx,pptx,xlsx] \
+      pdfplumber \
+      pdf2image \
+      pytesseract \
+      defusedxml \
+      pymupdf
+
+RUN npm install -g docx@9.7.1 pptxgenjs@4.0.1
+
+RUN printf '2.1.2\n' > /app/cli/VERSION
+
+RUN chown -R agent:agent /home/agent /app /usr/local/lib/python3.10/site-packages /usr/local/bin "${NODE_HOME}"

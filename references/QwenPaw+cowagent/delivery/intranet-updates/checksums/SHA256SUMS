@@ -1,0 +1,16 @@
+ec3f0b19df5642b8cfeb6bf54e7ff1b1c8f078c67210194c6f57c811803f0027  build-bundle.sh
+c78472256c8e0c55f067e580f7d83d930ab827e9fb84e9866f04b49dc0b063c0  collect-logs-all.sh
+db9a114c68f8b6295ee99ece15b0d0716b8c0b7391d5ca7d769d8b3f52ade9b3  common.sh
+cb3ff221dba21c0cc5c76a9939897d8d2b419a274e3776ec86c1956a4cd606cb  cowagent-site-update-v1.0.3-runtime-config.tar.gz
+c68a86e314d09af23494e894b8da5a8717ecdcec51a42a6454b2732d70cf890c  cowagent-site-update-v1.0.3-runtime-config.tar.gz.sha256
+913452441955356f93aa626f0f0b02ed4fdbf0b77d687f034da48dfaab92a8a8  cowagent-site-update-v1.0.4-officecli-toolpack.tar.gz
+e870d2418a6bfc812ce292f85efc2a6a5427d3953b6555a846d9e5e9bacd401d  cowagent-site-update-v1.0.4-officecli-toolpack.tar.gz.sha256
+623e6052dea159afa7c0ad2520e67c90d8929ec5f16c67b43f0833d3137757eb  cowagent-site-update-v1.0.5-html-report.tar.gz
+3743e50af10a967de461c6fde8230ca12405bb408977c48521077a10cd9ffb79  cowagent-site-update-v1.0.5-html-report.tar.gz.sha256
+98c7ead37cee06a270bb5bc0909c0c4ce796b215a4b5a88c50ef1d047bd9c2b3  cowagent-site-update-v1.0.6-mcp-ssh-manager.tar.gz
+3e5a66a6a545dea6a45d55d3bf1a7722a74dc4c0c0528ffd78afa5315bdc2c6e  cowagent-site-update-v1.0.6-mcp-ssh-manager.tar.gz.sha256
+31413c9d8bc346f8c5a5286e8cc2d8de8ab64be507918b3c49bbca22f409c243  deploy-all.sh
+25f79aa417177bed7326adf2d0803fc99a84827017c3947b95fb09011f74c9cd  manifest.json
+0952812426649945779eaa1a25d384d7fe6da5b88b75894e9e8a4188e371a103  rollback-all.sh
+066aafa83980bcb7371122987467fcff03fcbe058c5c8c228b7b85034c6c99a9  verify-all.sh
+87a3cdb6696f1853b21c71762d2c7aef1a21a2e97a3d7486bae23a7f6a4ecca7  内网增量更新顺序.md

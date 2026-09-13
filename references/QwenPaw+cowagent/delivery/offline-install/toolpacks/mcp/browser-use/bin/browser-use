@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TOOLPACK_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+PYTHON_BIN="${TOOLPACK_ROOT}/python/browser-use/runtime/cpython-3.11.15-linux-x86_64-gnu/bin/python3.11"
+SITE_PACKAGES="${TOOLPACK_ROOT}/python/browser-use/site-packages"
+
+[ -x "${PYTHON_BIN}" ] || {
+  echo "browser-use toolpack Python runtime is missing: ${PYTHON_BIN}" >&2
+  exit 127
+}
+
+export PYTHONUNBUFFERED="${PYTHONUNBUFFERED:-1}"
+export PYTHONPATH="${SITE_PACKAGES}${PYTHONPATH:+:${PYTHONPATH}}"
+export BROWSER_USE_HOME="${BROWSER_USE_HOME:-/home/agent/cow/browser-use}"
+export BH_HOME="${BH_HOME:-${BROWSER_USE_HOME}/harness}"
+export BH_AGENT_WORKSPACE="${BH_AGENT_WORKSPACE:-${BROWSER_USE_HOME}/agent-workspace}"
+export BH_RUNTIME_DIR="${BH_RUNTIME_DIR:-/tmp/cowagent-browser-use}"
+export BH_TMP_DIR="${BH_TMP_DIR:-${BROWSER_USE_HOME}/tmp}"
+export BH_TELEMETRY="${BH_TELEMETRY:-false}"
+export BROWSER_HARNESS_TELEMETRY="${BROWSER_HARNESS_TELEMETRY:-false}"
+export ANONYMIZED_TELEMETRY="${ANONYMIZED_TELEMETRY:-false}"
+
+if [ -z "${BU_CDP_URL:-}" ] && [ -z "${BU_CDP_WS:-}" ]; then
+  CHROME_BIN="${BH_CHROME_PATH:-/usr/bin/chromium}"
+  CHROME_PORT="${BH_CHROME_PORT:-9223}"
+  CHROME_PROFILE="${BH_CHROME_PROFILE:-${BROWSER_USE_HOME}/chromium-profile}"
+  mkdir -p "${CHROME_PROFILE}"
+  if ! (exec 3<>"/dev/tcp/127.0.0.1/${CHROME_PORT}") 2>/dev/null; then
+    "${CHROME_BIN}" \
+      --headless=new \
+      --no-sandbox \
+      --disable-gpu \
+      --disable-dev-shm-usage \
+      --disable-background-networking \
+      --disable-component-update \
+      --disable-default-apps \
+      --disable-sync \
+      --metrics-recording-only \
+      --no-first-run \
+      --remote-debugging-address=127.0.0.1 \
+      "--remote-debugging-port=${CHROME_PORT}" \
+      "--user-data-dir=${CHROME_PROFILE}" \
+      about:blank >/dev/null 2>&1 &
+    CHROME_PID=$!
+    trap 'kill "${CHROME_PID}" 2>/dev/null || true' EXIT
+    for _ in $(seq 1 50); do
+      if (exec 3<>"/dev/tcp/127.0.0.1/${CHROME_PORT}") 2>/dev/null; then
+        break
+      fi
+      sleep 0.1
+    done
+  fi
+  export BU_CDP_URL="http://127.0.0.1:${CHROME_PORT}"
+fi
+
+exec "${PYTHON_BIN}" -m browser_use.cli --cli-mcp "$@"

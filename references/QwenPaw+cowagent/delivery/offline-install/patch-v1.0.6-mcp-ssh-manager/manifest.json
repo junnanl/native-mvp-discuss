@@ -1,0 +1,58 @@
+{
+  "packageType": "patch",
+  "patchVersion": "1.0.6-mcp-ssh-manager",
+  "packageStatus": "release",
+  "requiresPackageVersion": "1.1.0",
+  "requiresPatchVersion": "1.0.5-html-report",
+  "requiresCowAgentVersion": "2.1.7",
+  "requiresBaseImage": "cowagent-offline:2.1.7-base.1-dev",
+  "dependencyChange": false,
+  "restartRequired": true,
+  "stateFile": "storage/cow/patch-state/1.0.6-mcp-ssh-manager.json",
+  "purpose": "Add a pinned, fully offline mcp-ssh-manager stdio Toolpack with all 37 tools, conversational connection administration, bundled native SSH utilities, and trust-on-first-use host-key verification.",
+  "targets": [
+    {
+      "type": "mcp-toolpack",
+      "source": "patches/toolpacks/mcp/mcp-ssh-manager",
+      "target": "toolpacks/mcp/mcp-ssh-manager"
+    },
+    {
+      "type": "mcp-runtime-config",
+      "source": "patches/runtime/mcp-ssh-manager",
+      "target": "storage/cow/mcp-ssh-manager"
+    },
+    {
+      "type": "cowagent-mcp-config-merge",
+      "source": "scripts/apply.sh",
+      "target": "storage/cow/mcp.json"
+    },
+    {
+      "type": "cowagent-skill",
+      "source": "patches/skills/ssh-manager-admin",
+      "target": "storage/cow/skills/ssh-manager-admin"
+    }
+  ],
+  "upstream": {
+    "repository": "https://github.com/bvisible/mcp-ssh-manager",
+    "version": "3.7.0",
+    "commit": "5c3a8137a3d8e083708770f067cada948d16022b",
+    "license": "MIT"
+  },
+  "offlineRuntime": [
+    "All production Node.js dependencies are included under node_modules.",
+    "rsync, sshpass, OpenSSH client tools, and required shared libraries are included under runtime.",
+    "No npm, pnpm, npx, apt, git, or network access is required at deployment time."
+  ],
+  "localAdaptations": [
+    "Enable all 37 upstream tools by default.",
+    "Allow unrestricted, readonly, and restricted per-server modes; default to unrestricted.",
+    "Manage structured SSH and database connection profiles through deterministic local scripts and a CowAgent Skill.",
+    "Accept and record first-seen host keys, reject changed keys, and support explicit re-trust.",
+    "Store runtime credentials outside the patch artifact with mode 600."
+  ],
+  "rollback": {
+    "strategy": "restore-backed-up-toolpack-runtime-config-cowagent-mcp-json-and-admin-skill",
+    "restartRequired": true
+  },
+  "createdAt": "2026-08-04T00:00:00+08:00"
+}

@@ -1,0 +1,25 @@
+# browser-dp toolpack 离线依赖锁定
+# 解释器：复用 1.1.0 基线的 CPython 3.11.15（toolpacks/python/browser-use/runtime）
+# 平台：linux-x86_64 (manylinux2014)
+# 制包方式：pip download -> wheel 内嵌 -> 现场解包 site-packages，零安装
+DrissionPage==4.0.5.6
+DownloadKit==2.0.7
+DataRecorder==3.6.2
+Pillow==12.2.0
+lxml==6.1.3
+psutil==7.2.2
+requests==2.34.2
+websocket-client==1.9.2
+tldextract==5.3.2
+certifi==2026.7.22
+charset-normalizer==3.5.1
+click==8.5.0
+cssselect==1.5.0
+filelock==3.32.5
+idna==3.19
+openpyxl==3.1.5
+et-xmlfile==2.0.0
+requests-file==3.0.1
+urllib3==2.7.0
+# mcp SDK 复用 1.1.0 基线 browser-use site-packages 内固化的版本，随包复制：
+mcp==1.26.0

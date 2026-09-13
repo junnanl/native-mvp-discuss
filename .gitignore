@@ -1,0 +1,18 @@
+.venv/
+__pycache__/
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+*:Zone.Identifier
+.DS_Store
+
+# Reference runtime bundles and generated delivery payloads
+references/**/node_modules/
+references/**/.venv/
+references/**/delivery/**/toolpacks/python/
+references/**/delivery/**/toolpacks/binaries/
+references/**/storage/
+references/**/runtime/

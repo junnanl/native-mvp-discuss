@@ -1,0 +1,115 @@
+{
+  "packageType": "offline-install",
+  "packageVersion": "1.1.0",
+  "packageStatus": "release",
+  "distArtifactsOfficial": true,
+  "cowagentVersion": "2.1.7",
+  "baseImage": "cowagent-offline:2.1.7-base.1-dev",
+  "baseImageLocalId": "sha256:8be71b08c5ce31a4dea8aba7184ef053648e5c8ca043d2713ce9a979d91ad74e",
+  "upstreamImage": "zhayujie/chatgpt-on-wechat:2.1.7",
+  "upstreamDigest": "sha256:84f02cbcee30bac9dde3f1bee36eb865c0eb03d7c36ea4a6d7a566dab4342c94",
+  "hostPorts": {
+    "web": "COW_WEB_PORT"
+  },
+  "hostRuntimeNames": {
+    "composeProject": "COW_COMPOSE_PROJECT_NAME",
+    "container": "COW_CONTAINER_NAME"
+  },
+  "networkMode": "bridge",
+  "hostDirectories": {
+    "storage": "storage",
+    "patchMounted": "patch-mounted",
+    "sourceMounted": "source-mounted",
+    "toolpacks": "toolpacks"
+  },
+  "seed": {
+    "workspace": "seed/workspace",
+    "installTarget": "storage/cow",
+    "overwriteExisting": false
+  },
+  "imageTar": "images/cowagent-offline-2.1.7-base.1-dev.tar",
+  "permissionPolicy": {
+    "mode": "open-mounted-directories",
+    "description": "Mounted runtime and patch directories are normalized to be readable, writable, and executable by all host and container users.",
+    "openPaths": [
+      "storage",
+      "patch-mounted",
+      "source-mounted",
+      "toolpacks",
+      "model-assets",
+      "scripts"
+    ],
+    "excludedPaths": [
+      "compose/.env",
+      "images",
+      "checksums",
+      "manifest.json"
+    ]
+  },
+  "preloadedSkills": [
+    "xlsx",
+    "docx",
+    "official-writing",
+    "markdown-converter",
+    "Word---DOCX",
+    "pdf",
+    "pptx",
+    "eda-reporter",
+    "browser-use"
+  ],
+  "verifiedRuntime": {
+    "nodeVersion": "24.18.0",
+    "systemCommands": [
+      "soffice",
+      "libreoffice",
+      "pandoc",
+      "pdftoppm",
+      "tesseract",
+      "node",
+      "npm",
+      "npx"
+    ],
+    "pythonModules": [
+      "fitz",
+      "pdfplumber",
+      "pdf2image",
+      "pytesseract",
+      "pandas",
+      "matplotlib",
+      "jinja2",
+      "seaborn",
+      "scipy",
+      "sklearn",
+      "markitdown",
+      "defusedxml"
+    ],
+    "nodeModules": [
+      "docx",
+      "pptxgenjs"
+    ]
+  },
+  "imageFixes": [
+    "Set /app/cli/VERSION to 2.1.7 so /api/version and Web UI match the fixed upstream image tag.",
+    "Install Chromium in the 2.1.7 base image for the offline browser-use CLI-MCP toolpack."
+  ],
+  "knownDependencyGaps": [
+    "browser-use requires Python 3.11 and is bundled as a dedicated toolpack runtime instead of using CowAgent's Python 3.10 site-packages."
+  ],
+  "dependencyChange": true,
+  "rollbackBaseline": {
+    "cowagentVersion": "2.1.2",
+    "baseImage": "cowagent-offline:2.1.2-base.2-dev",
+    "imageTar": "images/cowagent-offline-2.1.2-base.2-dev.tar",
+    "upstreamDigest": "sha256:02b33e78f6f0ccef4180359192613da8d63736d1c517b05bbed6f6f2d283822f"
+  },
+  "browserUse": {
+    "toolpack": "toolpacks/mcp/browser-use",
+    "pythonToolpack": "toolpacks/python/browser-use",
+    "version": "0.13.8",
+    "browserHarnessVersion": "0.1.9",
+    "mcpMode": "--cli-mcp",
+    "plannerBoundary": "CowAgent remains the only planner; browser-use only executes browser code",
+    "telemetry": "disabled"
+  },
+  "createdAt": "2026-08-26T11:30:00+08:00"
+}

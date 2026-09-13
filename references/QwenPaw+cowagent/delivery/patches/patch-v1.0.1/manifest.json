@@ -1,0 +1,92 @@
+{
+  "packageType": "patch",
+  "patchVersion": "1.0.1",
+  "packageStatus": "development-template-not-frozen",
+  "requiresPackageVersion": "1.0.0",
+  "requiresCowAgentVersion": "2.1.2",
+  "requiresBaseImage": "cowagent-offline:2.1.2-base.2-dev",
+  "dependencyChange": false,
+  "restartRequired": true,
+  "permissionPolicy": {
+    "mode": "open-mounted-directories",
+    "description": "After apply and rollback, mounted runtime and patch directories are normalized to be readable, writable, and executable by all host and container users.",
+    "openPaths": [
+      "storage",
+      "patch-mounted",
+      "source-mounted",
+      "toolpacks",
+      "model-assets",
+      "scripts"
+    ],
+    "excludedPaths": [
+      "compose/.env",
+      "images",
+      "checksums",
+      "manifest.json"
+    ]
+  },
+  "targets": [
+    {
+      "type": "skill",
+      "source": "patches/skills/xlsx",
+      "target": "storage/cow/skills/xlsx"
+    },
+    {
+      "type": "skill",
+      "source": "patches/skills/docx",
+      "target": "storage/cow/skills/docx"
+    },
+    {
+      "type": "skill",
+      "source": "patches/skills/official-writing",
+      "target": "storage/cow/skills/official-writing"
+    },
+    {
+      "type": "skill",
+      "source": "patches/skills/markdown-converter",
+      "target": "storage/cow/skills/markdown-converter"
+    },
+    {
+      "type": "skill",
+      "source": "patches/skills/Word---DOCX",
+      "target": "storage/cow/skills/Word---DOCX"
+    },
+    {
+      "type": "skill",
+      "source": "patches/skills/pdf",
+      "target": "storage/cow/skills/pdf"
+    },
+    {
+      "type": "skill",
+      "source": "patches/skills/pptx",
+      "target": "storage/cow/skills/pptx"
+    },
+    {
+      "type": "skill",
+      "source": "patches/skills/eda-reporter",
+      "target": "storage/cow/skills/eda-reporter"
+    }
+  ],
+  "knownDependencyGaps": [],
+  "runtimeExpectation": {
+    "baseImage": "cowagent-offline:2.1.2-base.2-dev",
+    "offlineCommands": [
+      "markitdown",
+      "soffice",
+      "pandoc",
+      "pdftoppm",
+      "tesseract",
+      "node",
+      "npm",
+      "npx"
+    ],
+    "forbiddenOnCustomerSite": [
+      "pip install",
+      "npm install",
+      "npx online install",
+      "uvx online install"
+    ]
+  },
+  "checksums": {},
+  "createdAt": "2026-07-01T18:28:39+08:00"
+}

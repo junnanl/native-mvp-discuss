@@ -1,0 +1,35 @@
+{
+  "packageType": "patch",
+  "patchVersion": "1.0.5-html-report",
+  "packageStatus": "release",
+  "requiresPackageVersion": "1.1.0",
+  "requiresPatchVersion": "1.0.4-officecli-toolpack",
+  "requiresCowAgentVersion": "2.1.7",
+  "requiresBaseImage": "cowagent-offline:2.1.7-base.1-dev",
+  "dependencyChange": false,
+  "restartRequired": true,
+  "stateFile": "storage/cow/patch-state/1.0.5-html-report.json",
+  "purpose": "Add the pinned TheoRata Report-Skill CowAgent adaptation for offline single-file HTML reports without introducing HTML Anything or runtime package installation.",
+  "targets": [
+    {
+      "type": "skill",
+      "source": "patches/skills/html-report",
+      "target": "storage/cow/skills/html-report"
+    },
+    {
+      "type": "skill-config-merge",
+      "source": "scripts/apply.sh",
+      "target": "storage/cow/skills/skills_config.json"
+    }
+  ],
+  "upstream": {
+    "repository": "https://github.com/TheoRata/Report-Skill",
+    "commit": "ffb97c2ce0c2f44449c1bc4fb6ef6057a27d02ca",
+    "license": "MIT"
+  },
+  "rollback": {
+    "strategy": "restore-backed-up-html-report-skill-and-skill-config",
+    "restartRequired": true
+  },
+  "createdAt": "2026-07-13T00:00:00+08:00"
+}

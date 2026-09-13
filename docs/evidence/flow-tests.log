@@ -1,0 +1,10 @@
+/home/liujunnan/gs-ai/native-mvp-discuss/backend/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+test_arriving_at_terminal_node_completes_without_extra_click (test_flow_api.FlowAPITest.test_arriving_at_terminal_node_completes_without_extra_click) ... ok
+test_missing_instance_does_not_get_invented (test_flow_api.FlowAPITest.test_missing_instance_does_not_get_invented) ... ok
+test_todo_moves_to_next_role_after_submission (test_flow_api.FlowAPITest.test_todo_moves_to_next_role_after_submission) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.034s
+
+OK

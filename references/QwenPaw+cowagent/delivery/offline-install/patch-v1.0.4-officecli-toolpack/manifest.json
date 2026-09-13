@@ -1,0 +1,35 @@
+{
+  "packageType": "patch",
+  "patchVersion": "1.0.4-officecli-toolpack",
+  "packageStatus": "release",
+  "requiresPackageVersion": "1.1.0",
+  "requiresPatchVersion": "1.0.3-runtime-config-persistence",
+  "requiresCowAgentVersion": "2.1.7",
+  "requiresBaseImage": "cowagent-offline:2.1.7-base.1-dev",
+  "dependencyChange": false,
+  "restartRequired": true,
+  "stateFile": "storage/cow/patch-state/1.0.4-officecli-toolpack.json",
+  "purpose": "Add the pinned OfficeCLI v1.0.134 offline user-space Toolpack and its CowAgent adapter Skill without deleting or disabling existing Office Skills.",
+  "targets": [
+    {
+      "type": "toolpack",
+      "source": "patches/toolpacks/binaries/officecli",
+      "target": "toolpacks/binaries/officecli"
+    },
+    {
+      "type": "skill",
+      "source": "patches/skills/officecli",
+      "target": "storage/cow/skills/officecli"
+    },
+    {
+      "type": "skill-config-merge",
+      "source": "scripts/apply.sh",
+      "target": "storage/cow/skills/skills_config.json"
+    }
+  ],
+  "rollback": {
+    "strategy": "restore-backed-up-toolpack-skill-and-skill-config",
+    "restartRequired": true
+  },
+  "createdAt": "2026-07-13T00:00:00+08:00"
+}

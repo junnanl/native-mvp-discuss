@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/common.sh"
+
+main() {
+  require_docker
+  require_env_file
+  local cmd
+  local env_file
+  cmd="$(compose_cmd)"
+  env_file="$(env_file_path)"
+  (cd "${COMPOSE_DIR}" && ${cmd} --env-file "${env_file}" ps)
+  echo
+  echo "Web host port: $(read_env_value COW_WEB_PORT || echo 9899)"
+}
+
+main "$@"

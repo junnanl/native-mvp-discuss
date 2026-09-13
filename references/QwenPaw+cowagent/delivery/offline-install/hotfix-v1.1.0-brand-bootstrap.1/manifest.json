@@ -1,0 +1,22 @@
+{
+  "packageType": "hotfix",
+  "hotfixVersion": "1.1.0-brand-bootstrap.1",
+  "packageStatus": "release",
+  "requiresPackageVersion": "1.1.0",
+  "requiresCowAgentVersion": "2.1.7",
+  "requiresBaseImage": "cowagent-offline:2.1.7-base.1-dev",
+  "dependencyChange": false,
+  "restartRequired": true,
+  "requiresComposeOverrideAbsent": true,
+  "onExistingOverride": "abort-without-modification",
+  "purpose": "Enable the existing Evo-Harness frontend and cow_cli brand patches on installations whose Compose override was omitted from the 1.1.0 offline package.",
+  "target": "compose/docker-compose.override.yml",
+  "preserves": [
+    "compose/.env",
+    "storage",
+    "images",
+    "patch-mounted",
+    "toolpacks"
+  ],
+  "createdAt": "2026-08-28T09:30:00+08:00"
+}

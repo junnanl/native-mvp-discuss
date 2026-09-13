@@ -1,0 +1,35 @@
+{
+  "name": "browser-use-cli-mcp",
+  "version": "0.13.8",
+  "upstream": "https://github.com/browser-use/browser-use",
+  "license": "MIT",
+  "browserHarnessVersion": "0.1.9",
+  "pythonVersion": "3.11.15",
+  "platform": "linux-x64",
+  "containerPath": "/opt/cowagent/toolpacks/mcp/browser-use/bin/browser-use",
+  "deliveryMode": "offline-toolpack",
+  "mcpTransport": "stdio",
+  "mcpMode": "--cli-mcp",
+  "tools": [
+    "browser_exec",
+    "browser_screenshot"
+  ],
+  "requiresBaseImage": "cowagent-offline:2.1.7-base.1-dev",
+  "requires": [
+    "Python 3.11 runtime and site-packages bundled under toolpacks/python/browser-use",
+    "Chromium executable provided by the 2.1.7 base image",
+    "glibc",
+    "libstdc++"
+  ],
+  "networkPolicy": "offline-only; no uvx, pip, playwright install, cloud, tunnel, or telemetry",
+  "plannerPolicy": "CowAgent remains the only planner; browser-use CLI-MCP only executes browser code",
+  "validation": {
+    "status": "development-built",
+    "checks": [
+      "fixed browser-use and browser-harness versions",
+      "local stdio MCP handshake",
+      "browser_exec and browser_screenshot tool discovery",
+      "offline import and CLI startup"
+    ]
+  }
+}

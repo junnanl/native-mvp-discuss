@@ -1,0 +1,11 @@
+services:
+  cowagent:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      COW_BRAND_NAME: "Evo-Harness"
+      CHATGPT_ON_WECHAT_EXEC: "unset MODEL BOT_TYPE OPEN_AI_API_KEY OPEN_AI_API_BASE DASHSCOPE_API_KEY DEEPSEEK_API_KEY DEEPSEEK_API_BASE EMBEDDING_PROVIDER EMBEDDING_MODEL RERANK_PROVIDER AGENT_MAX_CONTEXT_TOKENS AGENT_MAX_CONTEXT_TURNS AGENT_MAX_STEPS; if [ -f /opt/cowagent/patch-mounted/frontend/bootstrap-brand.sh ]; then sh /opt/cowagent/patch-mounted/frontend/bootstrap-brand.sh; fi; python app.py"
+    volumes:
+      - ../storage/cow/app-config/config.json:/app/config.json:rw
+      - ../storage/cow/env-config:/root/.cow:rw
+      - ../storage/cow/env-config:/home/agent/.cow:rw

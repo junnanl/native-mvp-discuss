@@ -1,0 +1,34 @@
+{
+  "packageType": "patch",
+  "patchVersion": "1.0.3-runtime-config-persistence",
+  "packageStatus": "release",
+  "requiresPackageVersion": "1.0.0",
+  "requiresCowAgentVersion": "2.1.2",
+  "requiresBaseImage": "cowagent-offline:2.1.2-base.2-dev",
+  "dependencyChange": false,
+  "restartRequired": true,
+  "stateFile": "storage/cow/patch-state/1.0.3-runtime-config-persistence.json",
+  "purpose": "Persist CowAgent runtime config.json and skill env config so model, vision, embedding, rerank, MinerU and agent context settings survive incremental patches and container recreation.",
+  "targets": [
+    {
+      "type": "runtime-config",
+      "source": "CONFIG_SOURCE or existing container /app/config.json",
+      "target": "storage/cow/app-config/config.json"
+    },
+    {
+      "type": "skill-env-config",
+      "source": "derived from storage/cow/app-config/config.json",
+      "target": "storage/cow/env-config/.env"
+    },
+    {
+      "type": "compose-override",
+      "source": "patches/compose/docker-compose.override.yml",
+      "target": "compose/docker-compose.override.yml"
+    }
+  ],
+  "rollback": {
+    "strategy": "restore-backed-up-compose-override-and-runtime-config",
+    "restartRequired": true
+  },
+  "createdAt": "2026-07-08T16:10:00+08:00"
+}

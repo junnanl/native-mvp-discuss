@@ -1,0 +1,39 @@
+name: ${COW_COMPOSE_PROJECT_NAME:-cowagent-offline}
+
+services:
+  cowagent:
+    image: ${COW_IMAGE:-cowagent-offline:2.1.7-base.1-dev}
+    container_name: ${COW_CONTAINER_NAME:-cowagent-offline}
+    restart: unless-stopped
+    network_mode: bridge
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - "${COW_WEB_PORT:-9899}:9899"
+    environment:
+      COW_LANG: ${COW_LANG:-zh}
+      CHANNEL_TYPE: ${COW_CHANNEL_TYPE:-web}
+      MODEL: ${MODEL:-deepseek-v4-pro}
+      BOT_TYPE: ${BOT_TYPE:-dashscope}
+      WEB_HOST: "0.0.0.0"
+      WEB_PASSWORD: ${COW_WEB_PASSWORD:-}
+      AGENT: "True"
+      AGENT_WORKSPACE: "/home/agent/cow"
+      AGENT_MAX_CONTEXT_TOKENS: ${COW_AGENT_MAX_CONTEXT_TOKENS:-50000}
+      AGENT_MAX_CONTEXT_TURNS: ${COW_AGENT_MAX_CONTEXT_TURNS:-20}
+      AGENT_MAX_STEPS: ${COW_AGENT_MAX_STEPS:-20}
+      USE_LINKAI: "False"
+      OPEN_AI_API_KEY: ${OPEN_AI_API_KEY:-}
+      OPEN_AI_API_BASE: ${OPEN_AI_API_BASE:-}
+      DASHSCOPE_API_KEY: ${DASHSCOPE_API_KEY:-}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      DEEPSEEK_API_BASE: ${DEEPSEEK_API_BASE:-}
+      EMBEDDING_PROVIDER: ${EMBEDDING_PROVIDER:-}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-}
+      RERANK_PROVIDER: ${RERANK_PROVIDER:-}
+    volumes:
+      - ../storage/cow:/home/agent/cow
+      - ../storage/logs:/var/log/cowagent-offline
+      - ../patch-mounted:/opt/cowagent/patch-mounted:ro
+      - ../source-mounted:/opt/cowagent/source-mounted:ro
+      - ../toolpacks:/opt/cowagent/toolpacks:ro

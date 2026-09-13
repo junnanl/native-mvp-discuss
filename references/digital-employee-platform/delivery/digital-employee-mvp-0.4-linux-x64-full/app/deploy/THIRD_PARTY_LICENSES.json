@@ -1,0 +1,2456 @@
+{
+  "Apache-2.0": [
+    {
+      "name": "@a2ui/markdown-it",
+      "versions": [
+        "0.1.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@a2ui+markdown-it@0.1.1_@a2ui+web_core@0.10.6/node_modules/@a2ui/markdown-it"
+      ],
+      "license": "Apache-2.0",
+      "author": "Google",
+      "homepage": "https://github.com/a2ui-project/a2ui#readme",
+      "description": "A Markdown renderer using markdown-it and dompurify."
+    },
+    {
+      "name": "@a2ui/react",
+      "versions": [
+        "0.10.2"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@a2ui+react@0.10.2_react-dom@19.2.8_react@19.2.8__react@19.2.8_zod@3.25.76/node_modules/@a2ui/react"
+      ],
+      "license": "Apache-2.0",
+      "homepage": "https://a2ui.org/",
+      "description": "React renderer for A2UI (Agent-to-User Interface)"
+    },
+    {
+      "name": "@a2ui/web_core",
+      "versions": [
+        "0.10.6"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@a2ui+web_core@0.10.6/node_modules/@a2ui/web_core"
+      ],
+      "license": "Apache-2.0",
+      "author": "Google",
+      "homepage": "https://a2ui.org/",
+      "description": "A2UI Core Library"
+    },
+    {
+      "name": "@img/sharp-linux-x64",
+      "versions": [
+        "0.35.4"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@img+sharp-linux-x64@0.35.4/node_modules/@img/sharp-linux-x64"
+      ],
+      "license": "Apache-2.0",
+      "author": "Lovell Fuller",
+      "homepage": "https://sharp.pixelplumbing.com",
+      "description": "Prebuilt sharp for use with Linux (glibc) x64"
+    },
+    {
+      "name": "@swc/helpers",
+      "versions": [
+        "0.5.23"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@swc+helpers@0.5.23/node_modules/@swc/helpers"
+      ],
+      "license": "Apache-2.0",
+      "author": "강동윤",
+      "homepage": "https://swc.rs",
+      "description": "External helpers for the swc project."
+    },
+    {
+      "name": "baseline-browser-mapping",
+      "versions": [
+        "2.11.15"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/baseline-browser-mapping@2.11.15/node_modules/baseline-browser-mapping"
+      ],
+      "license": "Apache-2.0",
+      "homepage": "https://github.com/web-platform-dx/baseline-browser-mapping#readme",
+      "description": "A library for obtaining browser versions with their maximum supported Baseline feature set and Widely Available status."
+    },
+    {
+      "name": "class-variance-authority",
+      "versions": [
+        "0.7.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/class-variance-authority@0.7.1/node_modules/class-variance-authority"
+      ],
+      "license": "Apache-2.0",
+      "author": "Joe Bell",
+      "homepage": "https://github.com/joe-bell/cva#readme",
+      "description": "Class Variance Authority 🧬"
+    },
+    {
+      "name": "detect-libc",
+      "versions": [
+        "2.1.2"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/detect-libc@2.1.2/node_modules/detect-libc"
+      ],
+      "license": "Apache-2.0",
+      "author": "Lovell Fuller",
+      "homepage": "https://github.com/lovell/detect-libc#readme",
+      "description": "Node.js module to detect the C standard library (libc) implementation family and version"
+    },
+    {
+      "name": "sharp",
+      "versions": [
+        "0.35.4"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/sharp@0.35.4_@types+node@22.20.1/node_modules/sharp"
+      ],
+      "license": "Apache-2.0",
+      "author": "Lovell Fuller",
+      "homepage": "https://sharp.pixelplumbing.com",
+      "description": "High performance Node.js image processing, the fastest module to resize JPEG, PNG, WebP, GIF, AVIF and TIFF images"
+    }
+  ],
+  "MIT": [
+    {
+      "name": "@ag-ui/core",
+      "versions": [
+        "0.0.57"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@ag-ui+core@0.0.57/node_modules/@ag-ui/core"
+      ],
+      "license": "MIT",
+      "author": "Markus Ecker",
+      "homepage": "https://github.com/ag-ui-protocol/ag-ui#readme"
+    },
+    {
+      "name": "@floating-ui/core",
+      "versions": [
+        "1.8.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@floating-ui+core@1.8.0/node_modules/@floating-ui/core"
+      ],
+      "license": "MIT",
+      "author": "atomiks",
+      "homepage": "https://floating-ui.com",
+      "description": "Positioning library for floating elements: tooltips, popovers, dropdowns, and more"
+    },
+    {
+      "name": "@floating-ui/dom",
+      "versions": [
+        "1.8.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@floating-ui+dom@1.8.0/node_modules/@floating-ui/dom"
+      ],
+      "license": "MIT",
+      "author": "atomiks",
+      "homepage": "https://floating-ui.com",
+      "description": "Floating UI for the web"
+    },
+    {
+      "name": "@floating-ui/react-dom",
+      "versions": [
+        "2.1.9"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@floating-ui+react-dom@2.1.9_react-dom@19.2.8_react@19.2.8__react@19.2.8/node_modules/@floating-ui/react-dom"
+      ],
+      "license": "MIT",
+      "author": "atomiks",
+      "homepage": "https://floating-ui.com/docs/react-dom",
+      "description": "Floating UI for React DOM"
+    },
+    {
+      "name": "@floating-ui/utils",
+      "versions": [
+        "0.2.12"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@floating-ui+utils@0.2.12/node_modules/@floating-ui/utils"
+      ],
+      "license": "MIT",
+      "author": "atomiks",
+      "homepage": "https://floating-ui.com",
+      "description": "Utilities for Floating UI"
+    },
+    {
+      "name": "@img/colour",
+      "versions": [
+        "1.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@img+colour@1.1.0/node_modules/@img/colour"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/lovell/colour#readme",
+      "description": "The ESM-only 'color' package made compatible for use with CommonJS runtimes"
+    },
+    {
+      "name": "@next/env",
+      "versions": [
+        "16.3.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@next+env@16.3.1/node_modules/@next/env"
+      ],
+      "license": "MIT",
+      "author": "Next.js Team",
+      "homepage": "https://github.com/vercel/next.js#readme",
+      "description": "Next.js dotenv file loading"
+    },
+    {
+      "name": "@next/swc-linux-x64-gnu",
+      "versions": [
+        "16.3.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@next+swc-linux-x64-gnu@16.3.1/node_modules/@next/swc-linux-x64-gnu"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/vercel/next.js#readme"
+    },
+    {
+      "name": "@preact/signals-core",
+      "versions": [
+        "1.14.4"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@preact+signals-core@1.14.4/node_modules/@preact/signals-core"
+      ],
+      "license": "MIT",
+      "homepage": "https://preactjs.com",
+      "description": "Manage state with style in every framework"
+    },
+    {
+      "name": "@radix-ui/number",
+      "versions": [
+        "1.1.1",
+        "1.1.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+number@1.1.1/node_modules/@radix-ui/number",
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+number@1.1.3/node_modules/@radix-ui/number"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/primitive",
+      "versions": [
+        "1.1.3",
+        "1.1.7"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+primitive@1.1.3/node_modules/@radix-ui/primitive",
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+primitive@1.1.7/node_modules/@radix-ui/primitive"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-arrow",
+      "versions": [
+        "1.1.7"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-arrow@1.1.7_@types+react-dom@19.2.4_@types+react@19.2.18__@types+react@_8f87e70d9f0d94e6bec720923e7f1221/node_modules/@radix-ui/react-arrow"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-avatar",
+      "versions": [
+        "1.1.11"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-avatar@1.1.11_@types+react-dom@19.2.4_@types+react@19.2.18__@types+reac_a460ecb6c6f2fcf0af558666449d4c3f/node_modules/@radix-ui/react-avatar"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-collection",
+      "versions": [
+        "1.1.7",
+        "1.1.15"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-collection@1.1.7_@types+react-dom@19.2.4_@types+react@19.2.18__@types+r_cc003428dd7a1bc8b48fcd6f10739c7c/node_modules/@radix-ui/react-collection",
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-collection@1.1.15_@types+react-dom@19.2.4_@types+react@19.2.18__@types+_4f0967bbdb3338bf8cbc78ecf7537f1d/node_modules/@radix-ui/react-collection"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-compose-refs",
+      "versions": [
+        "1.1.2",
+        "1.1.5"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-compose-refs@1.1.2_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-compose-refs",
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-compose-refs@1.1.5_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-compose-refs"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-context",
+      "versions": [
+        "1.1.2",
+        "1.1.3",
+        "1.2.2"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-context@1.1.2_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-context",
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-context@1.1.3_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-context",
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-context@1.2.2_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-context"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-direction",
+      "versions": [
+        "1.1.1",
+        "1.1.4"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-direction@1.1.1_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-direction",
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-direction@1.1.4_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-direction"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-dismissable-layer",
+      "versions": [
+        "1.1.11"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-dismissable-layer@1.1.11_@types+react-dom@19.2.4_@types+react@19.2.18___86945ee7bd6562cda46326943bb0aece/node_modules/@radix-ui/react-dismissable-layer"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-focus-guards",
+      "versions": [
+        "1.1.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-focus-guards@1.1.3_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-focus-guards"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-focus-scope",
+      "versions": [
+        "1.1.7"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-focus-scope@1.1.7_@types+react-dom@19.2.4_@types+react@19.2.18__@types+_018ebf8b947ec4b0570866633ca6d962/node_modules/@radix-ui/react-focus-scope"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-id",
+      "versions": [
+        "1.1.1",
+        "1.1.4"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-id@1.1.1_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-id",
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-id@1.1.4_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-id"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-popper",
+      "versions": [
+        "1.2.8"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-popper@1.2.8_@types+react-dom@19.2.4_@types+react@19.2.18__@types+react_879ab025e489538c3a94912166062900/node_modules/@radix-ui/react-popper"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-portal",
+      "versions": [
+        "1.1.9"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-portal@1.1.9_@types+react-dom@19.2.4_@types+react@19.2.18__@types+react_40b3c78d944261cafe4dacce3185e5bc/node_modules/@radix-ui/react-portal"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-presence",
+      "versions": [
+        "1.1.10"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-presence@1.1.10_@types+react-dom@19.2.4_@types+react@19.2.18__@types+re_c16522d094fa2977c5a9a5cd628ab890/node_modules/@radix-ui/react-presence"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-primitive",
+      "versions": [
+        "2.1.3",
+        "2.1.4",
+        "2.1.10"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-primitive@2.1.3_@types+react-dom@19.2.4_@types+react@19.2.18__@types+re_2c936760405406a7adcaefada073e362/node_modules/@radix-ui/react-primitive",
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-primitive@2.1.4_@types+react-dom@19.2.4_@types+react@19.2.18__@types+re_35f54208150e1760ba08124e21e07913/node_modules/@radix-ui/react-primitive",
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-primitive@2.1.10_@types+react-dom@19.2.4_@types+react@19.2.18__@types+r_89d529a1bae70a6b01b956c8b2bdbce1/node_modules/@radix-ui/react-primitive"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-roving-focus",
+      "versions": [
+        "1.1.19"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-roving-focus@1.1.19_@types+react-dom@19.2.4_@types+react@19.2.18__@type_bffcd6db2ed1d8f04e36037911e67927/node_modules/@radix-ui/react-roving-focus"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-scroll-area",
+      "versions": [
+        "1.2.18"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-scroll-area@1.2.18_@types+react-dom@19.2.4_@types+react@19.2.18__@types_6b6486115e65d545f1c3c97d550989e0/node_modules/@radix-ui/react-scroll-area"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-select",
+      "versions": [
+        "2.2.6"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-select@2.2.6_@types+react-dom@19.2.4_@types+react@19.2.18__@types+react_954c8007e0993ca506518f0dfd875bf5/node_modules/@radix-ui/react-select"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-slot",
+      "versions": [
+        "1.2.3",
+        "1.2.4",
+        "1.3.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-slot@1.2.3_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-slot",
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-slot@1.2.4_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-slot",
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-slot@1.3.3_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-slot"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-tabs",
+      "versions": [
+        "1.1.21"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-tabs@1.1.21_@types+react-dom@19.2.4_@types+react@19.2.18__@types+react@_ed28580769b7e80737d078724056bb75/node_modules/@radix-ui/react-tabs"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-use-callback-ref",
+      "versions": [
+        "1.1.1",
+        "1.1.4"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-use-callback-ref@1.1.1_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-use-callback-ref",
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-use-callback-ref@1.1.4_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-use-callback-ref"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-use-controllable-state",
+      "versions": [
+        "1.2.2",
+        "1.2.6"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-use-controllable-state@1.2.2_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-use-controllable-state",
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-use-controllable-state@1.2.6_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-use-controllable-state"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-use-effect-event",
+      "versions": [
+        "0.0.2",
+        "0.0.5"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-use-effect-event@0.0.2_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-use-effect-event",
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-use-effect-event@0.0.5_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-use-effect-event"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-use-escape-keydown",
+      "versions": [
+        "1.1.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-use-escape-keydown@1.1.1_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-use-escape-keydown"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-use-is-hydrated",
+      "versions": [
+        "0.1.0",
+        "0.1.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-use-is-hydrated@0.1.0_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-use-is-hydrated",
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-use-is-hydrated@0.1.3_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-use-is-hydrated"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-use-layout-effect",
+      "versions": [
+        "1.1.1",
+        "1.1.4"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-use-layout-effect@1.1.1_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-use-layout-effect",
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-use-layout-effect@1.1.4_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-use-layout-effect"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-use-previous",
+      "versions": [
+        "1.1.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-use-previous@1.1.1_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-use-previous"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-use-rect",
+      "versions": [
+        "1.1.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-use-rect@1.1.1_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-use-rect"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-use-size",
+      "versions": [
+        "1.1.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-use-size@1.1.1_@types+react@19.2.18_react@19.2.8/node_modules/@radix-ui/react-use-size"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/react-visually-hidden",
+      "versions": [
+        "1.2.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+react-visually-hidden@1.2.3_@types+react-dom@19.2.4_@types+react@19.2.18__@ty_4c1aea32227a17276836fb4059448ea2/node_modules/@radix-ui/react-visually-hidden"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@radix-ui/rect",
+      "versions": [
+        "1.1.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@radix-ui+rect@1.1.1/node_modules/@radix-ui/rect"
+      ],
+      "license": "MIT",
+      "homepage": "https://radix-ui.com/primitives"
+    },
+    {
+      "name": "@types/debug",
+      "versions": [
+        "4.1.13"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@types+debug@4.1.13/node_modules/@types/debug"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/debug",
+      "description": "TypeScript definitions for debug"
+    },
+    {
+      "name": "@types/estree",
+      "versions": [
+        "1.0.9"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@types+estree@1.0.9/node_modules/@types/estree"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/estree",
+      "description": "TypeScript definitions for estree"
+    },
+    {
+      "name": "@types/estree-jsx",
+      "versions": [
+        "1.0.5"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@types+estree-jsx@1.0.5/node_modules/@types/estree-jsx"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/estree-jsx",
+      "description": "TypeScript definitions for estree-jsx"
+    },
+    {
+      "name": "@types/hast",
+      "versions": [
+        "3.0.5"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@types+hast@3.0.5/node_modules/@types/hast"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/hast",
+      "description": "TypeScript definitions for hast"
+    },
+    {
+      "name": "@types/mdast",
+      "versions": [
+        "4.0.4"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@types+mdast@4.0.4/node_modules/@types/mdast"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/mdast",
+      "description": "TypeScript definitions for mdast"
+    },
+    {
+      "name": "@types/ms",
+      "versions": [
+        "2.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@types+ms@2.1.0/node_modules/@types/ms"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/ms",
+      "description": "TypeScript definitions for ms"
+    },
+    {
+      "name": "@types/node",
+      "versions": [
+        "22.20.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@types+node@22.20.1/node_modules/@types/node"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/node",
+      "description": "TypeScript definitions for node"
+    },
+    {
+      "name": "@types/react",
+      "versions": [
+        "19.2.18"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@types+react@19.2.18/node_modules/@types/react"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react",
+      "description": "TypeScript definitions for react"
+    },
+    {
+      "name": "@types/react-dom",
+      "versions": [
+        "19.2.4"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@types+react-dom@19.2.4_@types+react@19.2.18/node_modules/@types/react-dom"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react-dom",
+      "description": "TypeScript definitions for react-dom"
+    },
+    {
+      "name": "@types/trusted-types",
+      "versions": [
+        "2.0.7"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@types+trusted-types@2.0.7/node_modules/@types/trusted-types"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/trusted-types",
+      "description": "TypeScript definitions for trusted-types"
+    },
+    {
+      "name": "@types/unist",
+      "versions": [
+        "2.0.11",
+        "3.0.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@types+unist@2.0.11/node_modules/@types/unist",
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@types+unist@3.0.3/node_modules/@types/unist"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/unist",
+      "description": "TypeScript definitions for unist"
+    },
+    {
+      "name": "aria-hidden",
+      "versions": [
+        "1.2.6"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/aria-hidden@1.2.6/node_modules/aria-hidden"
+      ],
+      "license": "MIT",
+      "author": "Anton Korzunov",
+      "homepage": "https://github.com/theKashey/aria-hidden#readme",
+      "description": "Cast aria-hidden to everything, except..."
+    },
+    {
+      "name": "bail",
+      "versions": [
+        "2.0.2"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/bail@2.0.2/node_modules/bail"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/bail#readme",
+      "description": "Throw a given error"
+    },
+    {
+      "name": "ccount",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/ccount@2.0.1/node_modules/ccount"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/ccount#readme",
+      "description": "Count how often a character (or substring) is used in a string"
+    },
+    {
+      "name": "character-entities",
+      "versions": [
+        "2.0.2"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/character-entities@2.0.2/node_modules/character-entities"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/character-entities#readme",
+      "description": "Map of named character references"
+    },
+    {
+      "name": "character-entities-html4",
+      "versions": [
+        "2.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/character-entities-html4@2.1.0/node_modules/character-entities-html4"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/character-entities-html4#readme",
+      "description": "Map of named character references from HTML 4"
+    },
+    {
+      "name": "character-entities-legacy",
+      "versions": [
+        "3.0.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/character-entities-legacy@3.0.0/node_modules/character-entities-legacy"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/character-entities-legacy#readme",
+      "description": "List of legacy HTML named character references that don’t need a trailing semicolon"
+    },
+    {
+      "name": "character-reference-invalid",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/character-reference-invalid@2.0.1/node_modules/character-reference-invalid"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/character-reference-invalid#readme",
+      "description": "Map of invalid numeric character references to their replacements, according to HTML"
+    },
+    {
+      "name": "client-only",
+      "versions": [
+        "0.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/client-only@0.0.1/node_modules/client-only"
+      ],
+      "license": "MIT",
+      "homepage": "https://reactjs.org/",
+      "description": "This is a marker package to indicate that a module can only be used in Client Components."
+    },
+    {
+      "name": "clsx",
+      "versions": [
+        "2.1.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/clsx@2.1.1/node_modules/clsx"
+      ],
+      "license": "MIT",
+      "author": "Luke Edwards",
+      "homepage": "https://github.com/lukeed/clsx#readme",
+      "description": "A tiny (239B) utility for constructing className strings conditionally."
+    },
+    {
+      "name": "comma-separated-tokens",
+      "versions": [
+        "2.0.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/comma-separated-tokens@2.0.3/node_modules/comma-separated-tokens"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/comma-separated-tokens#readme",
+      "description": "Parse and stringify comma-separated tokens"
+    },
+    {
+      "name": "csstype",
+      "versions": [
+        "3.2.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/csstype@3.2.3/node_modules/csstype"
+      ],
+      "license": "MIT",
+      "author": "Fredrik Nicol",
+      "homepage": "https://github.com/frenic/csstype#readme",
+      "description": "Strict TypeScript and Flow types for style based on MDN data"
+    },
+    {
+      "name": "date-fns",
+      "versions": [
+        "4.4.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/date-fns@4.4.0/node_modules/date-fns"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/date-fns/date-fns#readme",
+      "description": "Modern JavaScript date utility library"
+    },
+    {
+      "name": "debug",
+      "versions": [
+        "4.4.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/debug@4.4.3/node_modules/debug"
+      ],
+      "license": "MIT",
+      "author": "Josh Junon",
+      "homepage": "https://github.com/debug-js/debug#readme",
+      "description": "Lightweight debugging utility for Node.js and the browser"
+    },
+    {
+      "name": "decode-named-character-reference",
+      "versions": [
+        "1.3.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/decode-named-character-reference@1.3.0/node_modules/decode-named-character-reference"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/decode-named-character-reference#readme",
+      "description": "Decode named character references"
+    },
+    {
+      "name": "dequal",
+      "versions": [
+        "2.0.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/dequal@2.0.3/node_modules/dequal"
+      ],
+      "license": "MIT",
+      "author": "Luke Edwards",
+      "homepage": "https://github.com/lukeed/dequal#readme",
+      "description": "A tiny (304B to 489B) utility for check for deep equality"
+    },
+    {
+      "name": "detect-node-es",
+      "versions": [
+        "1.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/detect-node-es@1.1.0/node_modules/detect-node-es"
+      ],
+      "license": "MIT",
+      "author": "Ilya Kantor",
+      "homepage": "https://github.com/thekashey/detect-node",
+      "description": "Detect Node.JS (as opposite to browser environment). ESM modification"
+    },
+    {
+      "name": "devlop",
+      "versions": [
+        "1.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/devlop@1.1.0/node_modules/devlop"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/devlop#readme",
+      "description": "Do things in development and nothing otherwise"
+    },
+    {
+      "name": "escape-string-regexp",
+      "versions": [
+        "5.0.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/escape-string-regexp@5.0.0/node_modules/escape-string-regexp"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/escape-string-regexp#readme",
+      "description": "Escape RegExp special characters"
+    },
+    {
+      "name": "estree-util-is-identifier-name",
+      "versions": [
+        "3.0.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/estree-util-is-identifier-name@3.0.0/node_modules/estree-util-is-identifier-name"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/estree-util-is-identifier-name#readme",
+      "description": "Check if something can be an ecmascript (javascript) identifier name"
+    },
+    {
+      "name": "extend",
+      "versions": [
+        "3.0.2"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/extend@3.0.2/node_modules/extend"
+      ],
+      "license": "MIT",
+      "author": "Stefan Thomas",
+      "homepage": "https://github.com/justmoon/node-extend#readme",
+      "description": "Port of jQuery.extend for node.js and the browser"
+    },
+    {
+      "name": "get-nonce",
+      "versions": [
+        "1.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/get-nonce@1.0.1/node_modules/get-nonce"
+      ],
+      "license": "MIT",
+      "author": "Anton Korzunov",
+      "homepage": "https://github.com/theKashey/get-nonce",
+      "description": "returns nonce"
+    },
+    {
+      "name": "hast-util-to-jsx-runtime",
+      "versions": [
+        "2.3.6"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/hast-util-to-jsx-runtime@2.3.6/node_modules/hast-util-to-jsx-runtime"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/hast-util-to-jsx-runtime#readme",
+      "description": "hast utility to transform to preact, react, solid, svelte, vue, etc"
+    },
+    {
+      "name": "hast-util-whitespace",
+      "versions": [
+        "3.0.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/hast-util-whitespace@3.0.0/node_modules/hast-util-whitespace"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/hast-util-whitespace#readme",
+      "description": "hast utility to check if a node is inter-element whitespace"
+    },
+    {
+      "name": "html-url-attributes",
+      "versions": [
+        "3.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/html-url-attributes@3.0.1/node_modules/html-url-attributes"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/rehypejs/rehype-minify/tree/main#readme",
+      "description": "Map of URL attributes in HTML"
+    },
+    {
+      "name": "inline-style-parser",
+      "versions": [
+        "0.2.7"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/inline-style-parser@0.2.7/node_modules/inline-style-parser"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/remarkablemark/inline-style-parser#readme",
+      "description": "An inline style parser."
+    },
+    {
+      "name": "is-alphabetical",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/is-alphabetical@2.0.1/node_modules/is-alphabetical"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/is-alphabetical#readme",
+      "description": "Check if a character is alphabetical"
+    },
+    {
+      "name": "is-alphanumerical",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/is-alphanumerical@2.0.1/node_modules/is-alphanumerical"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/is-alphanumerical#readme",
+      "description": "Check if a character is alphanumerical"
+    },
+    {
+      "name": "is-decimal",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/is-decimal@2.0.1/node_modules/is-decimal"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/is-decimal#readme",
+      "description": "Check if a character is decimal"
+    },
+    {
+      "name": "is-hexadecimal",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/is-hexadecimal@2.0.1/node_modules/is-hexadecimal"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/is-hexadecimal#readme",
+      "description": "Check if a character is hexadecimal"
+    },
+    {
+      "name": "is-plain-obj",
+      "versions": [
+        "4.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/is-plain-obj@4.1.0/node_modules/is-plain-obj"
+      ],
+      "license": "MIT",
+      "author": "Sindre Sorhus",
+      "homepage": "https://github.com/sindresorhus/is-plain-obj#readme",
+      "description": "Check if a value is a plain object"
+    },
+    {
+      "name": "linkify-it",
+      "versions": [
+        "5.0.2"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/linkify-it@5.0.2/node_modules/linkify-it"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/markdown-it/linkify-it#readme",
+      "description": "Links recognition library with FULL unicode support"
+    },
+    {
+      "name": "longest-streak",
+      "versions": [
+        "3.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/longest-streak@3.1.0/node_modules/longest-streak"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/longest-streak#readme",
+      "description": "Count the longest repeating streak of a substring"
+    },
+    {
+      "name": "markdown-it",
+      "versions": [
+        "14.3.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/markdown-it@14.3.0/node_modules/markdown-it"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/markdown-it/markdown-it#readme",
+      "description": "Markdown-it - modern pluggable markdown parser."
+    },
+    {
+      "name": "markdown-table",
+      "versions": [
+        "3.0.4"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/markdown-table@3.0.4/node_modules/markdown-table"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/markdown-table#readme",
+      "description": "Generate a markdown (GFM) table"
+    },
+    {
+      "name": "mdast-util-find-and-replace",
+      "versions": [
+        "3.0.2"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/mdast-util-find-and-replace@3.0.2/node_modules/mdast-util-find-and-replace"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/mdast-util-find-and-replace#readme",
+      "description": "mdast utility to find and replace text in a tree"
+    },
+    {
+      "name": "mdast-util-from-markdown",
+      "versions": [
+        "2.0.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/mdast-util-from-markdown@2.0.3/node_modules/mdast-util-from-markdown"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/mdast-util-from-markdown#readme",
+      "description": "mdast utility to parse markdown"
+    },
+    {
+      "name": "mdast-util-gfm",
+      "versions": [
+        "3.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/mdast-util-gfm@3.1.0/node_modules/mdast-util-gfm"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/mdast-util-gfm#readme",
+      "description": "mdast extension to parse and serialize GFM (GitHub Flavored Markdown)"
+    },
+    {
+      "name": "mdast-util-gfm-autolink-literal",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/mdast-util-gfm-autolink-literal@2.0.1/node_modules/mdast-util-gfm-autolink-literal"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/mdast-util-gfm-autolink-literal#readme",
+      "description": "mdast extension to parse and serialize GFM autolink literals"
+    },
+    {
+      "name": "mdast-util-gfm-footnote",
+      "versions": [
+        "2.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/mdast-util-gfm-footnote@2.1.0/node_modules/mdast-util-gfm-footnote"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/mdast-util-gfm-footnote#readme",
+      "description": "mdast extension to parse and serialize GFM footnotes"
+    },
+    {
+      "name": "mdast-util-gfm-strikethrough",
+      "versions": [
+        "2.0.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/mdast-util-gfm-strikethrough@2.0.0/node_modules/mdast-util-gfm-strikethrough"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/mdast-util-gfm-strikethrough#readme",
+      "description": "mdast extension to parse and serialize GFM strikethrough"
+    },
+    {
+      "name": "mdast-util-gfm-table",
+      "versions": [
+        "2.0.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/mdast-util-gfm-table@2.0.0/node_modules/mdast-util-gfm-table"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/mdast-util-gfm-table#readme",
+      "description": "mdast extension to parse and serialize GFM tables"
+    },
+    {
+      "name": "mdast-util-gfm-task-list-item",
+      "versions": [
+        "2.0.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/mdast-util-gfm-task-list-item@2.0.0/node_modules/mdast-util-gfm-task-list-item"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/mdast-util-gfm-task-list-item#readme",
+      "description": "mdast extension to parse and serialize GFM task list items"
+    },
+    {
+      "name": "mdast-util-mdx-expression",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/mdast-util-mdx-expression@2.0.1/node_modules/mdast-util-mdx-expression"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/mdast-util-mdx-expression#readme",
+      "description": "mdast extension to parse and serialize MDX (or MDX.js) expressions"
+    },
+    {
+      "name": "mdast-util-mdx-jsx",
+      "versions": [
+        "3.2.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/mdast-util-mdx-jsx@3.2.0/node_modules/mdast-util-mdx-jsx"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/mdast-util-mdx-jsx#readme",
+      "description": "mdast extension to parse and serialize MDX or MDX.js JSX"
+    },
+    {
+      "name": "mdast-util-mdxjs-esm",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/mdast-util-mdxjs-esm@2.0.1/node_modules/mdast-util-mdxjs-esm"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/mdast-util-mdxjs-esm#readme",
+      "description": "mdast extension to parse and serialize MDX.js ESM (import/exports)"
+    },
+    {
+      "name": "mdast-util-phrasing",
+      "versions": [
+        "4.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/mdast-util-phrasing@4.1.0/node_modules/mdast-util-phrasing"
+      ],
+      "license": "MIT",
+      "author": "Victor Felder",
+      "homepage": "https://github.com/syntax-tree/mdast-util-phrasing#readme",
+      "description": "mdast utility to check if a node is phrasing content"
+    },
+    {
+      "name": "mdast-util-to-hast",
+      "versions": [
+        "13.2.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/mdast-util-to-hast@13.2.1/node_modules/mdast-util-to-hast"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/mdast-util-to-hast#readme",
+      "description": "mdast utility to transform to hast"
+    },
+    {
+      "name": "mdast-util-to-markdown",
+      "versions": [
+        "2.1.2"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/mdast-util-to-markdown@2.1.2/node_modules/mdast-util-to-markdown"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/mdast-util-to-markdown#readme",
+      "description": "mdast utility to serialize markdown"
+    },
+    {
+      "name": "mdast-util-to-string",
+      "versions": [
+        "4.0.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/mdast-util-to-string@4.0.0/node_modules/mdast-util-to-string"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/mdast-util-to-string#readme",
+      "description": "mdast utility to get the plain text content of a node"
+    },
+    {
+      "name": "mdurl",
+      "versions": [
+        "2.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/mdurl@2.1.0/node_modules/mdurl"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/markdown-it/mdurl#readme",
+      "description": "URL utilities for markdown-it"
+    },
+    {
+      "name": "micromark",
+      "versions": [
+        "4.0.2"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark@4.0.2/node_modules/micromark"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "small commonmark compliant markdown parser with positional info and concrete tokens"
+    },
+    {
+      "name": "micromark-core-commonmark",
+      "versions": [
+        "2.0.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-core-commonmark@2.0.3/node_modules/micromark-core-commonmark"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "The CommonMark markdown constructs"
+    },
+    {
+      "name": "micromark-extension-gfm",
+      "versions": [
+        "3.0.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-extension-gfm@3.0.0/node_modules/micromark-extension-gfm"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark-extension-gfm#readme",
+      "description": "micromark extension to support GFM (GitHub Flavored Markdown)"
+    },
+    {
+      "name": "micromark-extension-gfm-autolink-literal",
+      "versions": [
+        "2.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-extension-gfm-autolink-literal@2.1.0/node_modules/micromark-extension-gfm-autolink-literal"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark-extension-gfm-autolink-literal#readme",
+      "description": "micromark extension to support GFM autolink literals"
+    },
+    {
+      "name": "micromark-extension-gfm-footnote",
+      "versions": [
+        "2.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-extension-gfm-footnote@2.1.0/node_modules/micromark-extension-gfm-footnote"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark-extension-gfm-footnote#readme",
+      "description": "micromark extension to support GFM footnotes"
+    },
+    {
+      "name": "micromark-extension-gfm-strikethrough",
+      "versions": [
+        "2.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-extension-gfm-strikethrough@2.1.0/node_modules/micromark-extension-gfm-strikethrough"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark-extension-gfm-strikethrough#readme",
+      "description": "micromark extension to support GFM strikethrough"
+    },
+    {
+      "name": "micromark-extension-gfm-table",
+      "versions": [
+        "2.1.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-extension-gfm-table@2.1.1/node_modules/micromark-extension-gfm-table"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark-extension-gfm-table#readme",
+      "description": "micromark extension to support GFM tables"
+    },
+    {
+      "name": "micromark-extension-gfm-tagfilter",
+      "versions": [
+        "2.0.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-extension-gfm-tagfilter@2.0.0/node_modules/micromark-extension-gfm-tagfilter"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark-extension-gfm-tagfilter#readme",
+      "description": "micromark extension to support GFM tagfilter"
+    },
+    {
+      "name": "micromark-extension-gfm-task-list-item",
+      "versions": [
+        "2.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-extension-gfm-task-list-item@2.1.0/node_modules/micromark-extension-gfm-task-list-item"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark-extension-gfm-task-list-item#readme",
+      "description": "micromark extension to support GFM task list items"
+    },
+    {
+      "name": "micromark-factory-destination",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-factory-destination@2.0.1/node_modules/micromark-factory-destination"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark factory to parse destinations (found in resources, definitions)"
+    },
+    {
+      "name": "micromark-factory-label",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-factory-label@2.0.1/node_modules/micromark-factory-label"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark factory to parse labels (found in media, definitions)"
+    },
+    {
+      "name": "micromark-factory-space",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-factory-space@2.0.1/node_modules/micromark-factory-space"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark factory to parse markdown space (found in lots of places)"
+    },
+    {
+      "name": "micromark-factory-title",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-factory-title@2.0.1/node_modules/micromark-factory-title"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark factory to parse markdown titles (found in resources, definitions)"
+    },
+    {
+      "name": "micromark-factory-whitespace",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-factory-whitespace@2.0.1/node_modules/micromark-factory-whitespace"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark factory to parse markdown whitespace (found in lots of places)"
+    },
+    {
+      "name": "micromark-util-character",
+      "versions": [
+        "2.1.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-util-character@2.1.1/node_modules/micromark-util-character"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark utility to handle character codes"
+    },
+    {
+      "name": "micromark-util-chunked",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-util-chunked@2.0.1/node_modules/micromark-util-chunked"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark utility to splice and push with giant arrays"
+    },
+    {
+      "name": "micromark-util-classify-character",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-util-classify-character@2.0.1/node_modules/micromark-util-classify-character"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark utility to classify whether a character is whitespace or punctuation"
+    },
+    {
+      "name": "micromark-util-combine-extensions",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-util-combine-extensions@2.0.1/node_modules/micromark-util-combine-extensions"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark utility to combine syntax or html extensions"
+    },
+    {
+      "name": "micromark-util-decode-numeric-character-reference",
+      "versions": [
+        "2.0.2"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-util-decode-numeric-character-reference@2.0.2/node_modules/micromark-util-decode-numeric-character-reference"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark utility to decode numeric character references"
+    },
+    {
+      "name": "micromark-util-decode-string",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-util-decode-string@2.0.1/node_modules/micromark-util-decode-string"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark utility to decode markdown strings"
+    },
+    {
+      "name": "micromark-util-encode",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-util-encode@2.0.1/node_modules/micromark-util-encode"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark utility to encode dangerous html characters"
+    },
+    {
+      "name": "micromark-util-html-tag-name",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-util-html-tag-name@2.0.1/node_modules/micromark-util-html-tag-name"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark utility with list of html tag names"
+    },
+    {
+      "name": "micromark-util-normalize-identifier",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-util-normalize-identifier@2.0.1/node_modules/micromark-util-normalize-identifier"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark utility normalize identifiers (as found in references, definitions)"
+    },
+    {
+      "name": "micromark-util-resolve-all",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-util-resolve-all@2.0.1/node_modules/micromark-util-resolve-all"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark utility to resolve subtokens"
+    },
+    {
+      "name": "micromark-util-sanitize-uri",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-util-sanitize-uri@2.0.1/node_modules/micromark-util-sanitize-uri"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark utility to sanitize urls"
+    },
+    {
+      "name": "micromark-util-subtokenize",
+      "versions": [
+        "2.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-util-subtokenize@2.1.0/node_modules/micromark-util-subtokenize"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark utility to tokenize subtokens"
+    },
+    {
+      "name": "micromark-util-symbol",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-util-symbol@2.0.1/node_modules/micromark-util-symbol"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark utility with symbols"
+    },
+    {
+      "name": "micromark-util-types",
+      "versions": [
+        "2.0.2"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/micromark-util-types@2.0.2/node_modules/micromark-util-types"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+      "description": "micromark utility with a couple of typescript types"
+    },
+    {
+      "name": "ms",
+      "versions": [
+        "2.1.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/ms@2.1.3/node_modules/ms"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/vercel/ms#readme",
+      "description": "Tiny millisecond conversion utility"
+    },
+    {
+      "name": "nanoid",
+      "versions": [
+        "3.3.18"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/nanoid@3.3.18/node_modules/nanoid"
+      ],
+      "license": "MIT",
+      "author": "Andrey Sitnik",
+      "homepage": "https://github.com/ai/nanoid#readme",
+      "description": "A tiny (116 bytes), secure URL-friendly unique string ID generator"
+    },
+    {
+      "name": "next",
+      "versions": [
+        "16.3.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/next@16.3.1_@types+node@22.20.1_react-dom@19.2.8_react@19.2.8__react@19.2.8/node_modules/next"
+      ],
+      "license": "MIT",
+      "homepage": "https://nextjs.org",
+      "description": "The React Framework"
+    },
+    {
+      "name": "parse-entities",
+      "versions": [
+        "4.0.2"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/parse-entities@4.0.2/node_modules/parse-entities"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/parse-entities#readme",
+      "description": "Parse HTML character references"
+    },
+    {
+      "name": "postcss",
+      "versions": [
+        "8.5.23"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/postcss@8.5.23/node_modules/postcss"
+      ],
+      "license": "MIT",
+      "author": "Andrey Sitnik",
+      "homepage": "https://postcss.org/",
+      "description": "Tool for transforming styles with JS plugins"
+    },
+    {
+      "name": "property-information",
+      "versions": [
+        "7.2.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/property-information@7.2.0/node_modules/property-information"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/property-information#readme",
+      "description": "Info on the properties and attributes of the web platform"
+    },
+    {
+      "name": "punycode.js",
+      "versions": [
+        "2.3.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/punycode.js@2.3.1/node_modules/punycode.js"
+      ],
+      "license": "MIT",
+      "author": "Mathias Bynens",
+      "homepage": "https://mths.be/punycode",
+      "description": "A robust Punycode converter that fully complies to RFC 3492 and RFC 5891, and works on nearly all JavaScript platforms."
+    },
+    {
+      "name": "react",
+      "versions": [
+        "19.2.8"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/react@19.2.8/node_modules/react"
+      ],
+      "license": "MIT",
+      "homepage": "https://react.dev/",
+      "description": "React is a JavaScript library for building user interfaces."
+    },
+    {
+      "name": "react-dom",
+      "versions": [
+        "19.2.8"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/react-dom@19.2.8_react@19.2.8/node_modules/react-dom"
+      ],
+      "license": "MIT",
+      "homepage": "https://react.dev/",
+      "description": "React package for working with the DOM."
+    },
+    {
+      "name": "react-markdown",
+      "versions": [
+        "10.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/react-markdown@10.1.0_@types+react@19.2.18_react@19.2.8/node_modules/react-markdown"
+      ],
+      "license": "MIT",
+      "author": "Espen Hovlandsdal",
+      "homepage": "https://github.com/remarkjs/react-markdown#readme",
+      "description": "React component to render markdown"
+    },
+    {
+      "name": "react-remove-scroll",
+      "versions": [
+        "2.7.2"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/react-remove-scroll@2.7.2_@types+react@19.2.18_react@19.2.8/node_modules/react-remove-scroll"
+      ],
+      "license": "MIT",
+      "author": "Anton Korzunov",
+      "homepage": "https://github.com/theKashey/react-remove-scroll#readme",
+      "description": "Disables scroll outside of `children` node."
+    },
+    {
+      "name": "react-remove-scroll-bar",
+      "versions": [
+        "2.3.8"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/react-remove-scroll-bar@2.3.8_@types+react@19.2.18_react@19.2.8/node_modules/react-remove-scroll-bar"
+      ],
+      "license": "MIT",
+      "author": "Anton Korzunov",
+      "homepage": "https://github.com/theKashey/react-remove-scroll-bar#readme",
+      "description": "Removes body scroll without content _shake_"
+    },
+    {
+      "name": "react-style-singleton",
+      "versions": [
+        "2.2.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/react-style-singleton@2.2.3_@types+react@19.2.18_react@19.2.8/node_modules/react-style-singleton"
+      ],
+      "license": "MIT",
+      "author": "Anton Korzunov",
+      "homepage": "https://github.com/theKashey/react-style-singleton#readme",
+      "description": "Just create a single stylesheet..."
+    },
+    {
+      "name": "remark-gfm",
+      "versions": [
+        "4.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/remark-gfm@4.0.1/node_modules/remark-gfm"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/remarkjs/remark-gfm#readme",
+      "description": "remark plugin to support GFM (autolink literals, footnotes, strikethrough, tables, tasklists)"
+    },
+    {
+      "name": "remark-parse",
+      "versions": [
+        "11.0.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/remark-parse@11.0.0/node_modules/remark-parse"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://remark.js.org",
+      "description": "remark plugin to add support for parsing markdown input"
+    },
+    {
+      "name": "remark-rehype",
+      "versions": [
+        "11.1.2"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/remark-rehype@11.1.2/node_modules/remark-rehype"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/remarkjs/remark-rehype#readme",
+      "description": "remark plugin that turns markdown into HTML to support rehype"
+    },
+    {
+      "name": "remark-stringify",
+      "versions": [
+        "11.0.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/remark-stringify@11.0.0/node_modules/remark-stringify"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://remark.js.org",
+      "description": "remark plugin to add support for serializing markdown"
+    },
+    {
+      "name": "scheduler",
+      "versions": [
+        "0.27.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/scheduler@0.27.0/node_modules/scheduler"
+      ],
+      "license": "MIT",
+      "homepage": "https://react.dev/",
+      "description": "Cooperative scheduler for the browser environment."
+    },
+    {
+      "name": "space-separated-tokens",
+      "versions": [
+        "2.0.2"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/space-separated-tokens@2.0.2/node_modules/space-separated-tokens"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/space-separated-tokens#readme",
+      "description": "Parse and stringify space separated tokens"
+    },
+    {
+      "name": "stringify-entities",
+      "versions": [
+        "4.0.4"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/stringify-entities@4.0.4/node_modules/stringify-entities"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/stringify-entities#readme",
+      "description": "Serialize (encode) HTML character references"
+    },
+    {
+      "name": "style-to-js",
+      "versions": [
+        "1.1.21"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/style-to-js@1.1.21/node_modules/style-to-js"
+      ],
+      "license": "MIT",
+      "author": "Mark",
+      "homepage": "https://github.com/remarkablemark/style-to-js#readme",
+      "description": "Parses CSS inline style to JavaScript object (camelCased)."
+    },
+    {
+      "name": "style-to-object",
+      "versions": [
+        "1.0.14"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/style-to-object@1.0.14/node_modules/style-to-object"
+      ],
+      "license": "MIT",
+      "author": "Mark",
+      "homepage": "https://github.com/remarkablemark/style-to-object#readme",
+      "description": "Parse CSS inline style to JavaScript object."
+    },
+    {
+      "name": "styled-jsx",
+      "versions": [
+        "5.1.6"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/styled-jsx@5.1.6_react@19.2.8/node_modules/styled-jsx"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/vercel/styled-jsx#readme",
+      "description": "Full CSS support for JSX without compromises"
+    },
+    {
+      "name": "tailwind-merge",
+      "versions": [
+        "3.6.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/tailwind-merge@3.6.0/node_modules/tailwind-merge"
+      ],
+      "license": "MIT",
+      "author": "Dany Castillo",
+      "homepage": "https://github.com/dcastil/tailwind-merge",
+      "description": "Merge Tailwind CSS classes without style conflicts"
+    },
+    {
+      "name": "trim-lines",
+      "versions": [
+        "3.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/trim-lines@3.0.1/node_modules/trim-lines"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/trim-lines#readme",
+      "description": "Remove spaces and tabs around line-breaks"
+    },
+    {
+      "name": "trough",
+      "versions": [
+        "2.2.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/trough@2.2.0/node_modules/trough"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/trough#readme",
+      "description": "`trough` is middleware"
+    },
+    {
+      "name": "uc.micro",
+      "versions": [
+        "2.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/uc.micro@2.1.0/node_modules/uc.micro"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/markdown-it/uc.micro#readme",
+      "description": "Micro subset of unicode data files for markdown-it projects."
+    },
+    {
+      "name": "undici-types",
+      "versions": [
+        "6.21.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/undici-types@6.21.0/node_modules/undici-types"
+      ],
+      "license": "MIT",
+      "homepage": "https://undici.nodejs.org",
+      "description": "A stand-alone types package for Undici"
+    },
+    {
+      "name": "unified",
+      "versions": [
+        "11.0.5"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/unified@11.0.5/node_modules/unified"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://unifiedjs.com",
+      "description": "parse, inspect, transform, and serialize content through syntax trees"
+    },
+    {
+      "name": "unist-util-is",
+      "versions": [
+        "6.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/unist-util-is@6.0.1/node_modules/unist-util-is"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/unist-util-is#readme",
+      "description": "unist utility to check if a node passes a test"
+    },
+    {
+      "name": "unist-util-position",
+      "versions": [
+        "5.0.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/unist-util-position@5.0.0/node_modules/unist-util-position"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/unist-util-position#readme",
+      "description": "unist utility to get the position of a node"
+    },
+    {
+      "name": "unist-util-stringify-position",
+      "versions": [
+        "4.0.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/unist-util-stringify-position@4.0.0/node_modules/unist-util-stringify-position"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/unist-util-stringify-position#readme",
+      "description": "unist utility to serialize a node, position, or point as a human readable location"
+    },
+    {
+      "name": "unist-util-visit",
+      "versions": [
+        "5.1.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/unist-util-visit@5.1.0/node_modules/unist-util-visit"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/unist-util-visit#readme",
+      "description": "unist utility to visit nodes"
+    },
+    {
+      "name": "unist-util-visit-parents",
+      "versions": [
+        "6.0.2"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/unist-util-visit-parents@6.0.2/node_modules/unist-util-visit-parents"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/syntax-tree/unist-util-visit-parents#readme",
+      "description": "unist utility to recursively walk over nodes, with ancestral information"
+    },
+    {
+      "name": "use-callback-ref",
+      "versions": [
+        "1.3.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/use-callback-ref@1.3.3_@types+react@19.2.18_react@19.2.8/node_modules/use-callback-ref"
+      ],
+      "license": "MIT",
+      "author": "theKashey",
+      "homepage": "https://github.com/theKashey/use-callback-ref#readme",
+      "description": "The same useRef, but with callback"
+    },
+    {
+      "name": "use-sidecar",
+      "versions": [
+        "1.1.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/use-sidecar@1.1.3_@types+react@19.2.18_react@19.2.8/node_modules/use-sidecar"
+      ],
+      "license": "MIT",
+      "author": "theKashey",
+      "homepage": "https://github.com/theKashey/use-sidecar",
+      "description": "Sidecar code splitting utils"
+    },
+    {
+      "name": "use-sync-external-store",
+      "versions": [
+        "1.6.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/use-sync-external-store@1.6.0_react@19.2.8/node_modules/use-sync-external-store"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/facebook/react#readme",
+      "description": "Backwards compatible shim for React's useSyncExternalStore. Works with any React that supports hooks."
+    },
+    {
+      "name": "vfile",
+      "versions": [
+        "6.0.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/vfile@6.0.3/node_modules/vfile"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/vfile/vfile#readme",
+      "description": "Virtual file format for text processing"
+    },
+    {
+      "name": "vfile-message",
+      "versions": [
+        "4.0.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/vfile-message@4.0.3/node_modules/vfile-message"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/vfile/vfile-message#readme",
+      "description": "vfile utility to create a virtual message"
+    },
+    {
+      "name": "zod",
+      "versions": [
+        "3.25.76"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/zod@3.25.76/node_modules/zod"
+      ],
+      "license": "MIT",
+      "author": "Colin McDonnell",
+      "homepage": "https://zod.dev",
+      "description": "TypeScript-first schema declaration and validation library with static type inference"
+    },
+    {
+      "name": "zwitch",
+      "versions": [
+        "2.0.4"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/zwitch@2.0.4/node_modules/zwitch"
+      ],
+      "license": "MIT",
+      "author": "Titus Wormer",
+      "homepage": "https://github.com/wooorm/zwitch#readme",
+      "description": "Handle values based on a property"
+    }
+  ],
+  "LGPL-3.0-or-later": [
+    {
+      "name": "@img/sharp-libvips-linux-x64",
+      "versions": [
+        "1.3.3"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@img+sharp-libvips-linux-x64@1.3.3/node_modules/@img/sharp-libvips-linux-x64"
+      ],
+      "license": "LGPL-3.0-or-later",
+      "author": "Lovell Fuller",
+      "homepage": "https://sharp.pixelplumbing.com",
+      "description": "Prebuilt libvips and dependencies for use with sharp on Linux (glibc) x64"
+    }
+  ],
+  "ISC": [
+    {
+      "name": "@ungap/structured-clone",
+      "versions": [
+        "1.3.4"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/@ungap+structured-clone@1.3.4/node_modules/@ungap/structured-clone"
+      ],
+      "license": "ISC",
+      "author": "Andrea Giammarchi",
+      "homepage": "https://github.com/ungap/structured-clone#readme",
+      "description": "A structuredClone polyfill"
+    },
+    {
+      "name": "lucide-react",
+      "versions": [
+        "0.468.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/lucide-react@0.468.0_react@19.2.8/node_modules/lucide-react"
+      ],
+      "license": "ISC",
+      "author": "Eric Fennis",
+      "homepage": "https://lucide.dev",
+      "description": "A Lucide icon library package for React applications"
+    },
+    {
+      "name": "picocolors",
+      "versions": [
+        "1.1.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/picocolors@1.1.1/node_modules/picocolors"
+      ],
+      "license": "ISC",
+      "author": "Alexey Raspopov",
+      "homepage": "https://github.com/alexeyraspopov/picocolors#readme",
+      "description": "The tiniest and the fastest library for terminal output formatting with ANSI colors"
+    },
+    {
+      "name": "semver",
+      "versions": [
+        "7.8.5"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/semver@7.8.5/node_modules/semver"
+      ],
+      "license": "ISC",
+      "author": "GitHub Inc.",
+      "homepage": "https://github.com/npm/node-semver#readme",
+      "description": "The semantic version parser used by npm."
+    },
+    {
+      "name": "zod-to-json-schema",
+      "versions": [
+        "3.25.2"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/zod-to-json-schema@3.25.2_zod@3.25.76/node_modules/zod-to-json-schema"
+      ],
+      "license": "ISC",
+      "author": "Stefan Terdell",
+      "homepage": "https://github.com/StefanTerdell/zod-to-json-schema#readme",
+      "description": "Converts Zod schemas to Json Schemas"
+    }
+  ],
+  "Python-2.0": [
+    {
+      "name": "argparse",
+      "versions": [
+        "2.0.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/argparse@2.0.1/node_modules/argparse"
+      ],
+      "license": "Python-2.0",
+      "homepage": "https://github.com/nodeca/argparse#readme",
+      "description": "CLI arguments parser. Native port of python's argparse."
+    }
+  ],
+  "CC-BY-4.0": [
+    {
+      "name": "caniuse-lite",
+      "versions": [
+        "1.0.30001809"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/caniuse-lite@1.0.30001809/node_modules/caniuse-lite"
+      ],
+      "license": "CC-BY-4.0",
+      "author": "Ben Briggs",
+      "homepage": "https://github.com/browserslist/caniuse-lite#readme",
+      "description": "A smaller version of caniuse-db, with only the essentials!"
+    }
+  ],
+  "(MPL-2.0 OR Apache-2.0)": [
+    {
+      "name": "dompurify",
+      "versions": [
+        "3.4.11"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/dompurify@3.4.11/node_modules/dompurify"
+      ],
+      "license": "(MPL-2.0 OR Apache-2.0)",
+      "author": "Dr.-Ing. Mario Heiderich, Cure53",
+      "homepage": "https://github.com/cure53/DOMPurify",
+      "description": "DOMPurify is a DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG. It runs as JavaScript and works in all modern browsers, as well as in Node.js (via jsdom). DOMPurify is written by security people who have vast background in web attacks and XSS. Fear not."
+    }
+  ],
+  "BSD-2-Clause": [
+    {
+      "name": "entities",
+      "versions": [
+        "4.5.0"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/entities@4.5.0/node_modules/entities"
+      ],
+      "license": "BSD-2-Clause",
+      "author": "Felix Boehm",
+      "homepage": "https://github.com/fb55/entities#readme",
+      "description": "Encode & decode XML and HTML entities with ease & speed"
+    }
+  ],
+  "BSD-3-Clause": [
+    {
+      "name": "source-map-js",
+      "versions": [
+        "1.2.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/source-map-js@1.2.1/node_modules/source-map-js"
+      ],
+      "license": "BSD-3-Clause",
+      "author": "Valentin 7rulnik Semirulnik",
+      "homepage": "https://github.com/7rulnik/source-map-js",
+      "description": "Generates and consumes source maps"
+    }
+  ],
+  "0BSD": [
+    {
+      "name": "tslib",
+      "versions": [
+        "2.8.1"
+      ],
+      "paths": [
+        "/home/liujunnan/gs-ai/digital-employee-platform/mvp/node_modules/.pnpm/tslib@2.8.1/node_modules/tslib"
+      ],
+      "license": "0BSD",
+      "author": "Microsoft Corp.",
+      "homepage": "https://www.typescriptlang.org/",
+      "description": "Runtime library for TypeScript helper functions"
+    }
+  ]
+}

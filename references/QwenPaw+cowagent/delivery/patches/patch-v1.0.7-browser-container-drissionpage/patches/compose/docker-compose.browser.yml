@@ -1,0 +1,66 @@
+# patch-v1.0.7: 独立浏览器容器（Chromium 常驻，与 CowAgent 生命周期解耦）
+# 镜像复用 1.1.0 基线已导入的 cowagent-offline:2.1.7-base.1-dev，不引入新镜像。
+# CDP 链路：Chromium 110+ 强制 DevTools 绑定环回（9223），容器内转发器把它
+# 暴露为 0.0.0.0:9222；cowagent 容器经 docker links（browser:9222）直连，
+# MCP 启动时把服务名解析为容器 IP 以满足 Chromium 的 Host 头校验。
+# 宿主机 loopback 39222 仅用于运维验证，不暴露内网。
+services:
+  browser:
+    image: ${COW_IMAGE:-cowagent-offline:2.1.7-base.1-dev}
+    container_name: ${COW_CONTAINER_NAME:-cowagent-offline}-browser
+    restart: on-failure
+    network_mode: bridge
+    mem_limit: ${COW_BROWSER_MEM_LIMIT:-4g}
+    memswap_limit: ${COW_BROWSER_MEM_LIMIT:-4g}
+    shm_size: 1g
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      # 仅宿主机 loopback 可达，不暴露给内网其他主机
+      - "127.0.0.1:${COW_BROWSER_CDP_PORT:-39222}:9222"
+    volumes:
+      - ../storage/browser/profile:/data/profile
+      - ../storage/browser/downloads:/data/downloads
+      - ../storage/browser/uploads:/data/uploads
+      - ../storage/logs/browser:/data/logs
+      - ../toolpacks/mcp/browser-dp/browser/entrypoint.sh:/opt/browser/entrypoint.sh:ro
+      - ../toolpacks/mcp/browser-dp/browser/cdp-forwarder.py:/opt/browser/cdp-forwarder.py:ro
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import socket;s=socket.create_connection(('127.0.0.1',9223),3);s.sendall(b'GET /json/version HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n');import sys;data=s.recv(4096);sys.exit(0 if b'200' in data.split(b'\\r\\n',1)[0] else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    entrypoint:
+      - /bin/bash
+      - /opt/browser/entrypoint.sh
+    command:
+      - --headless=new
+      - --no-sandbox
+      - --disable-gpu
+      - --disable-dev-shm-usage
+      - --disable-background-networking
+      - --disable-component-update
+      - --disable-default-apps
+      - --disable-sync
+      - --remote-allow-origins=*
+      - --disable-features=Translate,MediaRouter,OptimizationHints
+      - --hide-crash-restore-bubble
+      - --metrics-recording-only
+      - --no-first-run
+      - --no-default-browser-check
+      - --remote-debugging-address=127.0.0.1
+      - --remote-debugging-port=9223
+      - --user-data-dir=/data/profile
+      - about:blank
+
+  cowagent:
+    # 追加挂载：上传/下载目录与浏览器容器共享（bind 同一宿主目录）
+    volumes:
+      - ../storage/browser/downloads:/home/agent/cow/browser-dp/downloads
+      - ../storage/browser/uploads:/home/agent/cow/browser-dp/uploads
+    # MCP 侧经容器网络直连浏览器 CDP（地址 browser:9222）
+    links:
+      - browser:browser
