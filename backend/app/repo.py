@@ -137,17 +137,26 @@ AGENT_COLUMNS = ("id, name, description, avatar, category, maturity, tags, quick
                  " skill_md, harness_url, harness_key, status, usage_count, flow_instance_id, visible_to, created_at")
 
 
+AGENT_WITH_CREATOR = (
+    f"SELECT {', '.join('a.' + column.strip() for column in AGENT_COLUMNS.split(','))}, u.name AS creator_name"
+    " FROM agent a"
+    " LEFT JOIN flow_instance i ON i.id = a.flow_instance_id"
+    ' LEFT JOIN "user" u ON u.id = i.creator_id'
+)
+
+
 def list_agents(status: str | None = None) -> list[dict]:
+    """带上「谁做的」——企业内部有价值，知道找谁问（方案 §6.8）。"""
     where, params = ("", [])
     if status:
-        where, params = (" WHERE status=%s", [status])
+        where, params = (" WHERE a.status=%s", [status])
     with rows() as cur:
-        return cur.execute(f"SELECT {AGENT_COLUMNS} FROM agent{where} ORDER BY id", params).fetchall()
+        return cur.execute(f"{AGENT_WITH_CREATOR}{where} ORDER BY a.id", params).fetchall()
 
 
 def get_agent(agent_id: int) -> dict | None:
     with rows() as cur:
-        return cur.execute(f"SELECT {AGENT_COLUMNS} FROM agent WHERE id=%s", (agent_id,)).fetchone()
+        return cur.execute(f"{AGENT_WITH_CREATOR} WHERE a.id=%s", (agent_id,)).fetchone()
 
 
 def create_agent(values: dict) -> dict:

@@ -36,7 +36,7 @@ const readTypeConfig = {
 const PAGE_SIZE = 10
 
 interface TodoListProps {
-  items: { id: number; title: string; kind: string; status: string; owner: string }[]
+  items: { id: number; title: string; kind: string; status: string; owner: string; content?: string; time?: string }[]
   onNavigate: (path: string) => void
   compact?: boolean
 }

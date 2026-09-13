@@ -502,3 +502,72 @@ async def agent_stream(agent_id: int, request_id: str) -> StreamingResponse:
 
     return StreamingResponse(events(), media_type="text/event-stream",
                              headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
+
+class DuplicateCheckRequest(BaseModel):
+    flow_instance_id: int
+
+
+@app.post("/api/ai/duplicate-check")
+async def duplicate_check(request: DuplicateCheckRequest) -> dict:
+    """重复建设检测（方案 §6.6 图谱用法一），给评审用。
+
+    第一版不上向量检索——让模型直接判断这个新需求跟哪几个已有员工像，结果是给人
+    看的，人自己会判断。
+
+    ⚠️ 这是方案 §4 那张「四个调用点」表之外的第五处模型调用。已在
+    docs/实施进度.md 记录，按 AGENTS.md §1 先说再改。
+    """
+    instance = flow_instance(request.flow_instance_id)
+    definition = repo.get_flow_def(instance["flow_def_id"])
+    form = repo.form_of_flow(definition) if definition else None
+    described = "\n".join(
+        f'{field["label"]}：{instance["data"].get(field["key"], "")}'
+        for field in (form["fields"] if form else [])
+    ) or str(instance["data"])
+
+    existing = [agent for agent in repo.list_agents() if agent["status"] in {"已上线", "开发中"}]
+    known = {agent["id"] for agent in existing}
+    if not existing:
+        return {"component": "graph", "title": "重复建设检测",
+                "nodes": [{"id": "req", "label": "本需求", "type": "需求"}], "edges": [],
+                "note": "目前没有已有员工可比对。"}
+
+    def validate(raw: dict) -> tuple[dict | None, str | None]:
+        matches = raw.get("matches")
+        if not isinstance(matches, list):
+            return None, "matches 必须是数组"
+        cleaned = []
+        for item in matches:
+            if not isinstance(item, dict) or item.get("agent_id") not in known:
+                return None, f'agent_id 必须是这些之一：{sorted(known)}'
+            weight = item.get("weight")
+            if not isinstance(weight, (int, float)) or not 0 <= weight <= 1:
+                return None, "weight 必须是 0 到 1 之间的数"
+            cleaned.append({"agent_id": item["agent_id"], "weight": float(weight),
+                            "reason": str(item.get("reason", ""))})
+        return {"matches": cleaned}, None
+
+    listing = "\n".join(f'- id={agent["id"]} {agent["name"]}：{agent["description"]}' for agent in existing)
+    system = (
+        "判断这个新需求跟哪些已有数字员工在做的事情重合，只输出 JSON："
+        '{"matches":[{"agent_id":数字,"weight":0到1的相似度,"reason":"一句话说明"}]}。\n'
+        "不重合就返回空数组。不要编造清单以外的 id。\n\n"
+        f"已有的数字员工：\n{listing}"
+    )
+    try:
+        value, meta = await ai.structured(system, described, validate)
+    except ai.ModelUnavailable as error:
+        raise HTTPException(status_code=502, detail=str(error)) from error
+
+    by_id = {agent["id"]: agent for agent in existing}
+    nodes = [{"id": "req", "label": "本需求", "type": "需求"}]
+    edges = []
+    for match in value["matches"]:
+        agent = by_id[match["agent_id"]]
+        nodes.append({"id": f'agent:{agent["id"]}', "label": agent["name"], "type": "已有员工"})
+        edges.append({"source": "req", "target": f'agent:{agent["id"]}',
+                      "label": f'{int(match["weight"] * 100)}%', "weight": match["weight"]})
+    return {"component": "graph", "title": "重复建设检测", "nodes": nodes, "edges": edges,
+            "note": "、".join(m["reason"] for m in value["matches"]) or "没有发现明显重合。",
+            "_model": meta}

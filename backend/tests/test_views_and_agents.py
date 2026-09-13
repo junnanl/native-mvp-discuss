@@ -138,3 +138,53 @@ class HarnessProjectionTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class DuplicateCheckTest(unittest.TestCase):
+    """方案 §6.6 图谱用法一：重复建设检测。"""
+
+    def setUp(self):
+        support.reset()
+        self.client = TestClient(app)
+
+    def _requirement(self) -> int:
+        return self.client.post("/api/flow-instances", headers=support.headers("小林"), json={
+            "flow_def_id": 1, "data": {"name": "发票识别助手", "level": "高", "description": "识别发票"},
+        }).json()["id"]
+
+    def test_says_so_plainly_when_there_is_nothing_to_compare(self):
+        body = self.client.post("/api/ai/duplicate-check", json={"flow_instance_id": self._requirement()}).json()
+        self.assertEqual(body["edges"], [])
+        self.assertIn("没有已有员工", body["note"])
+
+    def test_similarity_edges_are_built_from_real_agents(self):
+        agent = self.client.post("/api/agents", headers=support.headers("阿凯"),
+                                 json={"name": "合同解析助手", "description": "解析合同"}).json()
+        self.client.put(f"/api/agents/{agent['id']}/skill", headers=support.headers("阿凯"),
+                        json={"skill_md": "# 合同解析\n步骤"})
+        with StubModel([
+            '{"matches":[{"agent_id":999,"weight":0.9,"reason":"编的"}]}',
+            '{"matches":[{"agent_id":%d,"weight":0.72,"reason":"都在做单据信息抽取"}]}' % agent["id"],
+        ]) as stub:
+            os.environ["MODEL_BASE_URL"] = stub.base_url
+            body = self.client.post("/api/ai/duplicate-check", json={"flow_instance_id": self._requirement()}).json()
+        self.assertEqual(body["component"], "graph")
+        self.assertEqual(len(body["edges"]), 1)
+        self.assertEqual(body["edges"][0]["target"], f"agent:{agent['id']}")
+        self.assertEqual(body["edges"][0]["label"], "72%")
+        self.assertEqual(body["_model"]["attempts"], 2, "编出来的 agent_id 必须被打回")
+        self.assertIn("单据信息抽取", body["note"])
+
+    def test_weight_must_be_a_ratio(self):
+        agent = self.client.post("/api/agents", headers=support.headers("阿凯"),
+                                 json={"name": "甲", "description": "乙"}).json()
+        self.client.put(f"/api/agents/{agent['id']}/skill", headers=support.headers("阿凯"),
+                        json={"skill_md": "# 甲\n步骤"})
+        with StubModel([
+            '{"matches":[{"agent_id":%d,"weight":87,"reason":"百分数写错了"}]}' % agent["id"],
+            '{"matches":[]}',
+        ]) as stub:
+            os.environ["MODEL_BASE_URL"] = stub.base_url
+            body = self.client.post("/api/ai/duplicate-check", json={"flow_instance_id": self._requirement()}).json()
+        self.assertEqual(body["edges"], [])
+        self.assertEqual(body["_model"]["attempts"], 2)
