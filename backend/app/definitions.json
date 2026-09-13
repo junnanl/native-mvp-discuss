@@ -3,7 +3,9 @@
     {"id": 1, "name": "小林", "role": "提需求"},
     {"id": 2, "name": "老周", "role": "评审"},
     {"id": 3, "name": "阿凯", "role": "开发"},
-    {"id": 4, "name": "小美", "role": "使用者"}
+    {"id": 4, "name": "小美", "role": "使用者"},
+    {"id": 5, "name": "陈主管", "role": "主管"},
+    {"id": 6, "name": "何会计", "role": "财务"}
   ],
 
   "forms": [
@@ -11,6 +13,15 @@
       {"key": "name", "label": "需求名称", "type": "text", "required": true},
       {"key": "level", "label": "紧急程度", "type": "select", "options": ["高", "中", "低"], "required": true},
       {"key": "description", "label": "需求描述", "type": "textarea", "required": true}
+    ]},
+
+    {"id": 2, "name": "费用报销单", "fields": [
+      {"key": "reason",      "label": "报销事由",   "type": "text",   "required": true},
+      {"key": "amount",      "label": "报销金额",   "type": "number", "required": true},
+      {"key": "happened_on", "label": "发生日期",   "type": "date",   "required": true},
+      {"key": "category",    "label": "费用类别",   "type": "select", "options": ["差旅", "招待", "办公", "其他"], "required": true},
+      {"key": "invoice_no",  "label": "发票号",     "type": "text"},
+      {"key": "remark",      "label": "备注",       "type": "textarea"}
     ]}
   ],
 
@@ -20,6 +31,13 @@
       {"key": "review",  "name": "评审",     "type": "审批", "role": "评审"},
       {"key": "develop", "name": "开发",     "type": "开发", "role": "开发"},
       {"key": "done",    "name": "已上线",   "type": "完成"}
+    ]},
+
+    {"id": 2, "name": "费用报销审批", "nodes": [
+      {"key": "submit",  "name": "提交报销", "type": "填单", "role": "使用者", "form_id": 2},
+      {"key": "manager", "name": "主管审批", "type": "审批", "role": "主管"},
+      {"key": "finance", "name": "财务审批", "type": "审批", "role": "财务"},
+      {"key": "done",    "name": "报销完成", "type": "完成"}
     ]}
   ],
 
@@ -32,6 +50,7 @@
     {"id": 6, "page_key": "todo",        "text": "这些都是谁提的",       "order": 3},
     {"id": 7, "page_key": "requirement", "text": "跟以前的有重复吗",     "order": 1},
     {"id": 8, "page_key": "requirement", "text": "帮我写评审意见",       "order": 2},
-    {"id": 9, "page_key": "requirement", "text": "大概要做多久",         "order": 3}
+    {"id": 9, "page_key": "requirement", "text": "大概要做多久",         "order": 3},
+    {"id": 10, "page_key": "home",       "text": "我要报销一笔差旅费",   "order": 4}
   ]
 }

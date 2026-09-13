@@ -42,12 +42,15 @@ def init_schema() -> None:
 
 
 def _seed_table(conn: psycopg.Connection, table: str, rows: list[dict], columns: tuple[str, ...]) -> None:
+    """按行补种：id 不存在就插入，已存在的一律不动。
+
+    于是「往种子文件里加一条流程」会在下次启动时进库，而运行期在库里改过的
+    定义不会被文件覆盖回去——数据库始终是运行时的唯一事实源。
+    """
     quoted = f'"{table}"'
-    if conn.execute(f"SELECT count(*) FROM {quoted}").fetchone()[0] > 0:
-        return
     column_sql = ", ".join(f'"{column}"' for column in columns)
     placeholders = ", ".join(["%s"] * len(columns))
     for row in rows:
         values = [json.dumps(row[column], ensure_ascii=False) if isinstance(row.get(column), (list, dict)) else row.get(column) for column in columns]
-        conn.execute(f"INSERT INTO {quoted} ({column_sql}) VALUES ({placeholders})", values)
+        conn.execute(f"INSERT INTO {quoted} ({column_sql}) VALUES ({placeholders}) ON CONFLICT (id) DO NOTHING", values)
     conn.execute(f"SELECT setval(pg_get_serial_sequence('{table}', 'id'), (SELECT COALESCE(MAX(id), 1) FROM {quoted}), true)")
