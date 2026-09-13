@@ -83,7 +83,8 @@ export default function ViewCard({ viewKey, title, query, data: given, onClose, 
       {data?.component === 'graph' && <Graph {...data} />}
       {data?.component === 'text' && <TextBlock {...data} />}
       {data?.component === 'table' && (
-        <Table {...data} onPage={setPage} onOpen={onOpenInstance} />
+        // 数据是员工一次性给的时候没法翻页，就别显示翻页控件——显示了点不动就是骗人
+        <Table {...data} onPage={viewKey ? setPage : undefined} onOpen={onOpenInstance} />
       )}
     </div>
   )

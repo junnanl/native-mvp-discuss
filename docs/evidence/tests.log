@@ -2,6 +2,6 @@
   from starlette.testclient import TestClient as TestClient  # noqa
 ..........................................
 ----------------------------------------------------------------------
-Ran 42 tests in 18.190s
+Ran 42 tests in 18.484s
 
 OK

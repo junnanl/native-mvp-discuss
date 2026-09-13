@@ -210,17 +210,19 @@ export default function Workbench({ user, onOpenAgent, onOpenInstance, onOpenAge
             <AgentCard key={agent.id} agent={agent} index={index} onOpen={() => onOpenAgent(agent)} />
           ))}
 
-          {startable.length > 0 && (
+          {/* 能发起几条流程就给几个入口，不能只给第一条 */}
+          {startable.map(flow => (
             <button
-              onClick={() => void startBlank(startable[0].id)}
+              key={flow.id}
+              onClick={() => void startBlank(flow.id)}
               className="rounded-lg border-2 border-dashed border-gray-200 p-4 flex flex-col items-center justify-center gap-2 text-gray-400 hover:border-[#1677FF] hover:text-[#1677FF] transition-colors min-h-[168px]"
             >
               <Plus className="w-6 h-6" />
-              <span className="text-sm">
-                {startable[0].id === 1 ? '我要一个新的' : `发起${startable[0].name}`}
+              <span className="text-sm text-center px-2">
+                {flow.id === 1 ? '我要一个新的' : `发起${flow.name}`}
               </span>
             </button>
-          )}
+          ))}
 
           {agents.length === 0 && startable.length === 0 && (
             <div className="col-span-full bg-white rounded-lg shadow-sm py-10 text-center text-sm text-gray-400">

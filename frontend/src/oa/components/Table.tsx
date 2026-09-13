@@ -2,7 +2,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import type { ViewData } from '../types'
 
 type Props = Extract<ViewData, { component: 'table' }> & {
-  onPage: (page: number) => void
+  onPage?: (page: number) => void
   onOpen?: (id: number) => void
 }
 
@@ -46,7 +46,7 @@ export default function Table({ columns, rows, page, page_size, total, onPage, o
           </tbody>
         </table>
       </div>
-      {pages > 1 && (
+      {pages > 1 && onPage && (
         <div className="flex items-center justify-end gap-2 mt-3 text-xs text-gray-500">
           <span>共 {total} 条</span>
           <button

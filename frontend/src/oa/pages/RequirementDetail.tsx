@@ -24,6 +24,8 @@ export default function RequirementDetail({ id, user, onChanged }: Props) {
   const [drafting, setDrafting] = useState(false)
   const [duplicates, setDuplicates] = useState<(ViewData & { note?: string }) | null>(null)
   const [checking, setChecking] = useState(false)
+  // 上线是「建员工 → 存 skill → 走完流程 → 上线」四步，中间失败重试不能再建一个
+  const [createdAgentId, setCreatedAgentId] = useState<number | null>(null)
 
   const load = useCallback(async () => {
     setError('')
@@ -93,10 +95,16 @@ export default function RequirementDetail({ id, user, onChanged }: Props) {
       const label = String(instance.data[flow.form?.fields[0]?.key ?? 'name'] ?? `数字员工 #${id}`)
       const description = String(
         instance.data[flow.form?.fields.find(field => field.type === 'textarea')?.key ?? ''] ?? '')
-      const agent = await api.post<Agent>('/agents', { name: label, description, skill_md: skill })
-      await api.put(`/agents/${agent.id}/skill`, { skill_md: skill })
-      await api.post<Instance>(`/flow-instances/${id}/advance`, { data: {} })
-      await api.post(`/agents/${agent.id}/publish`, { flow_instance_id: id })
+      let agentId = createdAgentId
+      if (agentId === null) {
+        agentId = (await api.post<Agent>('/agents', { name: label, description, skill_md: skill })).id
+        setCreatedAgentId(agentId)
+      }
+      await api.put(`/agents/${agentId}/skill`, { skill_md: skill })
+      if (instance.status !== '已完成') {
+        await api.post<Instance>(`/flow-instances/${id}/advance`, { data: {} })
+      }
+      await api.post(`/agents/${agentId}/publish`, { flow_instance_id: id })
       await load()
       onChanged()
     } catch (problem) {
